@@ -4,15 +4,65 @@
 	<title>On The Grid</title>
 
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../app/assets/styles.css">
+	<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
 </head>
 <body>
+	<div class="wrapper">
+
+		<div class="page-header">
+			<h1 class="text-center"> On The Grid </h1>
+		</div>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-10">
+
+					<p>test</p>
+					<!-- for login TODO: hide when logged in -->
+
+					<div class="container">
+					  <div class="jumbotron">
+					    <h1>Login With Google</h1> 
+					    	<form role="form">
+							  <div class="form-group">
+							    <label for="email">Gmail address:</label>
+							    <input type="email" class="form-control" id="email">
+							  </div>
+							  <button type="submit" class="btn btn-default">Submit</button>
+							</form>
+					  </div>
+					</div>
+					<a href='#' onClick='login();'> click here to login </a>
+    				<div id='uName'>Welcome  </div>
+   						 <img src='' id='imgHolder'/>
+					</div>
+
+				<div class="col-sm-2">
+					<button id="addingPanel" type="button" class="btn btn-default">Add A Page</button>
+
+				</div>
+
+			</div>
+
+			<div class="container-fluid">
+            <div class="site-footer" id="footer">
+                <div id="copyright">
+                    <p>© 2016 Copyright</p>
+                    <a href="https://www.linkedin.com/in/maryhoag" target="_blank">Mary Hoag</a>
+                </div>
+            </div>
+            </div>
 
 
+		</div>
+	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script src="./app/app.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ var bourbon = require('node-bourbon');
  
 gulp.task('sass', function () {
 	/*will search for and compile all Sass files*/
-  	gulp.src('app/assets/**/*.scss')
+  	gulp.src('public/app/assets/**/*.scss')
 
     //.pipe(sass().on('error', sass.logError))
     /*converts Sass to CSS within gulp-sass*/
@@ -24,10 +24,10 @@ gulp.task('sass', function () {
     	//includePaths: ['styles'].concat(neat)
     
     /*default css destination, Gulp will create this file*/
-    .pipe(gulp.dest('app/assets'));
+    .pipe(gulp.dest('public/app/assets'));
 });
  
 gulp.task('sass:watch', function () {
 	/*listens to Sass*/
-  gulp.watch('app/assets/**/*.scss', ['sass']);
+  gulp.watch('public/app/assets/**/*.scss', ['sass']);
 });
