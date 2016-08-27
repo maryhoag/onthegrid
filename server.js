@@ -25,15 +25,18 @@ app.use(bodyParser.json({type: "application/vnd.api + json"}));
 //allows access to the public folder
 app.use(express.static("./public"));
 
+
 // Main Route. This route will redirect to our rendered React application
 app.get('/', function(req, res){
   res.sendFile('./public/index.html');
 });
 
+
+//create db connection
+
 //database connected to TEST
 mongoose.connect('mongodb://localhost/test');
 
-//create db connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -77,9 +80,17 @@ silence.save(function (err, silence) {
   console.log('hi');
 });
 
-
 //Kitten.find({ name: /^Silence/ }, callback);
 
+
+var kittySchema = mongoose.Schema({
+    name: String
+});
+
+var Kitten = mongoose.model('Kitten', kittySchema);
+
+var silence = new Kitten({ name: 'Silence' });
+console.log(silence.name); // 'Silence'
 
 //GET route or in routes folder?
 
