@@ -25,6 +25,7 @@
     "node-dev-env": "^2.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "react-router": "^2.7.0",
     "request": "^2.74.0",
     "webpack": "^1.13.2"
   },

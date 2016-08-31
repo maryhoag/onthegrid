@@ -37,60 +37,60 @@ app.get('/', function(req, res){
 //database connected to TEST
 mongoose.connect('mongodb://localhost/test');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log('we are connected');
-});
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// db.once('open', function() {
+//   // we're connected!
+//   console.log('we are connected');
+// });
 
-//database test data
-var kittySchema = mongoose.Schema({
-    name: String
-});
-
-
-kittySchema.methods.speak = function () {
-  var greeting = this.name
-    ? "Meow name is " + this.name
-    : "I don't have a name";
-  console.log(greeting);
-}
-
-kittySchema.methods.hi = function() {
-	console.log('hiya');
-}
+// //database test data
+// var kittySchema = mongoose.Schema({
+//     name: String
+// });
 
 
-//new model
-var Kitten = mongoose.model('Kitten', kittySchema);
+// kittySchema.methods.speak = function () {
+//   var greeting = this.name
+//     ? "Meow name is " + this.name
+//     : "I don't have a name";
+//   console.log(greeting);
+// }
 
-//creates new kitten
-var silence = new Kitten({ name: 'Silence' });
-console.log(silence.name); // 'Silence'
+// kittySchema.methods.hi = function() {
+// 	console.log('hiya');
+// }
+
+
+// //new model
+// var Kitten = mongoose.model('Kitten', kittySchema);
+
+// //creates new kitten
+// var silence = new Kitten({ name: 'Silence' });
+// console.log(silence.name); // 'Silence'
 
 //silence.speak();
 
-silence.hi();
+// silence.hi();
 
-//actually saves the kitten to the db
-silence.save(function (err, silence) {
-  if (err) return console.error(err);
-  silence.speak();
-  console.log('hi');
-});
+// //actually saves the kitten to the db
+// silence.save(function (err, silence) {
+//   if (err) return console.error(err);
+//   silence.speak();
+//   console.log('hi');
+// });
 
-//Kitten.find({ name: /^Silence/ }, callback);
+// //Kitten.find({ name: /^Silence/ }, callback);
 
 
-var kittySchema = mongoose.Schema({
-    name: String
-});
+// var kittySchema = mongoose.Schema({
+//     name: String
+// });
 
-var Kitten = mongoose.model('Kitten', kittySchema);
+// var Kitten = mongoose.model('Kitten', kittySchema);
 
-var silence = new Kitten({ name: 'Silence' });
-console.log(silence.name); // 'Silence'
+// var silence = new Kitten({ name: 'Silence' });
+// console.log(silence.name); // 'Silence'
 
 //GET route or in routes folder?
 

@@ -20,11 +20,10 @@ var Main = React.createClass({
 
 		return (
 			<div id="wrapper">
-				//page header
 				<div className="page-header">
 					<div className="row">
 						<div className="col s9">
-							<h1 className="brand-logo center"> On The Grid </h1>
+							<h1 className="brand-logo center"> Log In With Google </h1>
 						</div>
 						<div className="col s3">
 							<a className="waves-effect waves-light btn">log out</a>

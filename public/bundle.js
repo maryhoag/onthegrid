@@ -21434,7 +21434,6 @@
 			return React.createElement(
 				'div',
 				{ id: 'wrapper' },
-				'//page header',
 				React.createElement(
 					'div',
 					{ className: 'page-header' },
@@ -21511,14 +21510,14 @@
 				),
 				React.createElement(
 					"button",
-					{ className: "btn-flat waves-effect waves-light", type: "submit", name: "action" },
+					{ className: "btn btn-flat waves-effect waves-light", type: "submit", name: "action" },
 					"Submit",
 					React.createElement(
 						"i",
 						{ className: "material-icons right" },
-						"send"
+						" send "
 					),
-					"//this won't work without jquery?"
+					"  //this won't work without jquery?"
 				)
 			);
 		}
