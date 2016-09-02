@@ -3,7 +3,7 @@ var Router = require('react-router')
 
 //Google auth code
 //TODO move the scritp to the helpers file?
-var auth = require('./assets/scripts/auth.js')
+//var auth = require('../../public/assets/scripts/auth.js')
 
 var Login = React.createClass({
 
@@ -15,7 +15,7 @@ var Login = React.createClass({
 
 
 
-	}
+	},
 
 	render: function() {
 		return(
@@ -31,7 +31,7 @@ var Login = React.createClass({
 		        </div>
 		    </div>
 		    <button className="btn btn-flat waves-effect waves-light" type="submit" name="action">Submit
-    			<i className="material-icons right"> send </i>  //this won't work without jquery?
+    			<i className="material-icons right"> send </i>  {/*this won't work without jquery? */}
  	 		</button>
 
 		</div>

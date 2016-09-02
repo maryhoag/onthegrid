@@ -2,7 +2,7 @@
 var React = require('react');
 
 //include children
-var Login = require('./Components/Login');
+var Login = require('./Login');
 
 //main component
 var Main = React.createClass({
