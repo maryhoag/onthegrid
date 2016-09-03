@@ -1,0 +1,24 @@
+/*import fonts*/
+/* import colors */
+/* import partials */
+#overwrite h3 {
+  color: #A60000;
+  border: blue; }
+
+#overwrite {
+  color: red; }
+
+#page-wrap {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 0 auto;
+  background-color: red; }
+
+footer {
+  background-color: blue; }
+
+header {
+  background-color: green; }
