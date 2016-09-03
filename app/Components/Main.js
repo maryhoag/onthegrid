@@ -20,7 +20,7 @@ var Main = React.createClass({
 
 		return (
 			<div id="wrapper">
-				<div className="page-header">
+				<header className="page-header">
 					<div className="row">
 						<div className="col s9">
 							<h1 className="brand-logo center"> Log In With Google </h1>
@@ -29,14 +29,25 @@ var Main = React.createClass({
 							<a className="waves-effect waves-light btn">log out</a>
 						</div>
 					</div>
-				</div>
+				</header>
 
-				<div className="containter">
+				<main className="container">
 
 					<Login />
 
 
-				</div>
+				</main>
+
+				<footer className="page-footer">
+		            <div id="footer">
+		                <div id="copyright">
+		                    <p> © 2016 Copyright
+		                    <a href="https://www.linkedin.com/in/maryhoag" target="_blank">   Mary Hoag </a>
+		                    </p>
+		                </div>
+		            </div>
+		        </footer>
+
 			</div>
 
 

@@ -21435,7 +21435,7 @@
 				'div',
 				{ id: 'wrapper' },
 				React.createElement(
-					'div',
+					'header',
 					{ className: 'page-header' },
 					React.createElement(
 						'div',
@@ -21461,9 +21461,31 @@
 					)
 				),
 				React.createElement(
-					'div',
-					{ className: 'containter' },
+					'main',
+					{ className: 'container' },
 					React.createElement(Login, null)
+				),
+				React.createElement(
+					'footer',
+					{ className: 'page-footer' },
+					React.createElement(
+						'div',
+						{ id: 'footer' },
+						React.createElement(
+							'div',
+							{ id: 'copyright' },
+							React.createElement(
+								'p',
+								null,
+								' © 2016 Copyright',
+								React.createElement(
+									'a',
+									{ href: 'https://www.linkedin.com/in/maryhoag', target: '_blank' },
+									'   Mary Hoag '
+								)
+							)
+						)
+					)
 				)
 			);
 		}
