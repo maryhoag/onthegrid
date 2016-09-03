@@ -13,7 +13,7 @@ var sass = require('gulp-sass');
  
 gulp.task('sass', function () {
 	/*will search for and compile all Sass files*/
-  	gulp.src('public/assets//**/*.scss')
+  	gulp.src('public/assets/**/*.scss')
 
     .pipe(sass().on('error', sass.logError))
     /*converts Sass to CSS within gulp-sass*/
