@@ -1,4 +1,7 @@
-var request = require('request');
+var Request = require('request');
+var Router = require('react-router').Router;
+var Route = require('react-router').Route;
+var Link = require('react-router').Link;
 
 var express = require('express');
 var bodyParser = require("body-parser");
@@ -63,7 +66,8 @@ db.once('open', function callback() {
 	});
 
 	//save
-	eighties.save();
+	var promise = eighties.save();
+	assert.ok(promise instanceof require('mpromise'));
 
 	mongoose.connection.db.close(function, err) {
 		if(err) throw err;
