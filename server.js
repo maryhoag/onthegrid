@@ -36,6 +36,39 @@ app.get('/', function(req, res){
 
 //database connected to TEST
 mongoose.connect('mongodb://localhost/test');
+//heroku uri
+//MONGODB_URI: mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q
+var mongooseURI =  'mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q';
+mongoose.connect(MONGODB_URI);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function callback() {
+
+	//create test schema
+	var songSchema = mongoose.Schema({
+		decade: String,
+		artist: String,
+
+	});
+
+	//store docs in collection
+	var Song = mongoose.model('songs', songSchema);
+	//seed data
+	var eighties = new Song({
+		decade: '1980s',
+		artist: 'The Cure'
+	});
+
+	//save
+	eighties.save();
+
+	mongoose.connection.db.close(function, err) {
+		if(err) throw err;
+	}
+});
 
 // var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
