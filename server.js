@@ -69,10 +69,10 @@ db.once('open', function callback() {
 	var promise = eighties.save();
 	assert.ok(promise instanceof require('mpromise'));
 
-	mongoose.connection.db.close(err) {
-		if(err) throw err;
-	}
-});
+// 	mongoose.connection.db.close(err) {
+// 		if(err) throw err;
+// 	}
+// });
 
 // var db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'connection error:'));
