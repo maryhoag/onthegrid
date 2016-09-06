@@ -11,8 +11,8 @@ var logger = require('morgan');
 var mongoose = require("mongoose");
 
 //wtf does this mean? this isn't what we did in class
-var databaseUrl = "location";
-var collections = "search";
+//var databaseUrl = "location";
+//var collections = "search";
 
 //creating an instance of express
 var app = express();
@@ -69,7 +69,7 @@ db.once('open', function callback() {
 	var promise = eighties.save();
 	assert.ok(promise instanceof require('mpromise'));
 
-	mongoose.connection.db.close(function, err) {
+	mongoose.connection.db.close(err) {
 		if(err) throw err;
 	}
 });
