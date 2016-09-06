@@ -67,7 +67,7 @@ db.once('open', function callback() {
 
 	//save
 	var promise = eighties.save();
-	assert.ok(promise instanceof require('mpromise'));
+	//assert.ok(promise instanceof require('mpromise'));
 
 });
 
