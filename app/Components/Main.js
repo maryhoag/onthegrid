@@ -2,6 +2,9 @@
 var React = require('react');
 var Route = require('react-router');
 
+import { Button, Card, Row, Col } from 'react-materialize';
+
+
 //include children
 var Login = require('./Login');
 var Dropdown = require('./Dropdowns');
