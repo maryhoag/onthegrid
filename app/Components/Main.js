@@ -6,7 +6,7 @@ var Route = require('react-router');
 var Login = require('./Login');
 var Dropdown = require('./Dropdowns');
 var Pages = require('./Pages');
-var AddingPage = require('./AddingPage');
+var AddPage = require('./AddingPage');
 
 //main component
 var Main = React.createClass({
