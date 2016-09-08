@@ -21465,20 +21465,18 @@
 				),
 				React.createElement(
 					'main',
-					{ className: 'container' },
+					null,
 					React.createElement(Login, null),
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'col s6' },
-							React.createElement(
-								'a',
-								{ className: 'waves-effect waves-light btn' },
-								'Add A Page'
-							)
-						)
+						React.createElement(Dropdown, null),
+						React.createElement(AddingPage, null)
+					),
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(Pages, null)
 					),
 					React.createElement(Dropdown, null)
 				),

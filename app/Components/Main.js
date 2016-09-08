@@ -34,16 +34,20 @@ var Main = React.createClass({
 					</div>
 				</header>
 
-				<main className="container">
+				<main>
 
 					<Login />
 
 					<div className="row">
-						<div className="col s6">
-							<a className="waves-effect waves-light btn">Add A Page</a>
 
-						</div>
+						<Dropdown />
 
+						<AddingPage />
+  					</div>
+
+					<div className="row">
+
+							<Pages />
 					</div>
 
 					<Dropdown />

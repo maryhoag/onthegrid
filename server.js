@@ -74,6 +74,8 @@ db.once('open', function callback() {
 		avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
 	});
 
+	testUser.add({pages: {'content here'} });
+
 
 	//store docs in collection
 	var Song = mongoose.model('songs', songSchema);
