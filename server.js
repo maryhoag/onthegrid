@@ -60,9 +60,10 @@ db.once('open', function callback() {
 	var userName = 'testUser';
 
 	var userSchema = mongoose.Schema({
-		name: String,
+		name: { String, required: true },
 		avatar: String,
-		pages: String
+		//TODO add: font, color, img
+		pages: [ {body: String, date: Date, default: Date.now} ]
 	});
 
 	//create collection for users
@@ -74,7 +75,7 @@ db.once('open', function callback() {
 		avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
 	});
 
-	testUser.add({ pages: 'content here' });
+	//testUser.add({ pages: 'content here' });
 
 
 	//store docs in collection
