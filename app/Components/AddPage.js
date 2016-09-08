@@ -1,7 +1,7 @@
 var React = require('react');
 var Route = require('react-router');
 
-var AddingPage = React.createClass({
+var AddPage = React.createClass({
 
 
 	clickHandler: function() {
@@ -43,4 +43,4 @@ var AddingPage = React.createClass({
 });
 
 
-module.exports = AddingPage;
+module.exports = AddPage;

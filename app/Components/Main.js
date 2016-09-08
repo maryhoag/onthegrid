@@ -46,7 +46,8 @@ var Main = React.createClass({
 
 					<div className="row">
 
-						<AddingPage />
+						<p>hello</p>
+						<AddPage />
   					</div>
 
 					<div className="row">
