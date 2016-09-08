@@ -21418,6 +21418,7 @@
 	var Login = __webpack_require__(236);
 	var Dropdown = __webpack_require__(237);
 	var Pages = __webpack_require__(238);
+	var AddPage = __webpack_require__(239);
 
 	//main component
 	var Main = React.createClass({
@@ -21470,15 +21471,23 @@
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						React.createElement(Dropdown, null),
-						React.createElement(AddingPage, null)
+						React.createElement(Dropdown, null)
+					),
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'p',
+							null,
+							'hello'
+						),
+						React.createElement(AddPage, null)
 					),
 					React.createElement(
 						'div',
 						{ className: 'row' },
 						React.createElement(Pages, null)
-					),
-					React.createElement(Dropdown, null)
+					)
 				),
 				React.createElement(
 					'footer',
@@ -27383,6 +27392,69 @@
 	});
 
 	module.exports = Pages;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Route = __webpack_require__(173);
+
+	var AddPage = React.createClass({
+		displayName: 'AddPage',
+
+
+		clickHandler: function clickHandler() {
+
+			console.log('i work');
+
+			//create object
+
+			//send to db
+
+		},
+
+		render: function render() {
+
+			return React.createElement(
+				'div',
+				{ className: 'row' },
+				React.createElement(
+					'form',
+					{ className: 'col s12' },
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'input-field col s12' },
+							React.createElement('textarea', { id: 'textarea1', className: 'materialize-textarea' }),
+							React.createElement(
+								'label',
+								{ 'for': 'textarea1' },
+								'What are you going to do today?'
+							)
+						)
+					)
+				),
+				React.createElement(
+					'button',
+					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action' },
+					'Save',
+					React.createElement(
+						'i',
+						{ className: 'material-icons right' },
+						'send'
+					)
+				)
+			);
+		}
+
+	});
+
+	module.exports = AddPage;
 
 /***/ }
 /******/ ]);
