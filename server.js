@@ -60,7 +60,7 @@ db.once('open', function callback() {
 	var userName = 'testUser';
 
 	var userSchema = mongoose.Schema({
-		name: { String, required: true },
+		name: String, //required: true },
 		avatar: String,
 		//TODO add: font, color, img
 		pages: [ {body: String, date: Date, default: Date.now} ]
