@@ -5,11 +5,11 @@ var Pages = React.createClass({
 
 	getInitialState: function() {
 
-		return(
+		return{
 
 			highlightColor: '',
 			fontChoice: ''
-		)
+		}
 
 	},
 

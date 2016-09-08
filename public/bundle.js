@@ -27329,7 +27329,11 @@
 
 		getInitialState: function getInitialState() {
 
-			return highlightColor, fontChoice;
+			return {
+
+				highlightColor: '',
+				fontChoice: ''
+			};
 		},
 
 		//call for pages info
