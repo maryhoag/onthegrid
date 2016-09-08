@@ -63,7 +63,7 @@ db.once('open', function callback() {
 		name: String, //required: true },
 		avatar: String,
 		//TODO add: font, color, img
-		pages: [ {body: String, date: Date, default: Date.now} ]
+		//pages: [ {body: String, date: Date, default: Date.now} ]
 	});
 
 	//create collection for users
