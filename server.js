@@ -59,7 +59,7 @@ db.once('open', function callback() {
 
 	var userName = 'testUser';
 
-	var userSchema = userSchema.add({
+	var userSchema = mongoose.Schema({
 		name: String,
 		avatar: String,
 		pages: Object
@@ -86,7 +86,7 @@ db.once('open', function callback() {
 	//save
 	var promise = eighties.save();
 	var promise = testUser.save();
-	
+
 	//assert.ok(promise instanceof require('mpromise'));
 
 });
