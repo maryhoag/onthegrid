@@ -6,6 +6,7 @@ var Route = require('react-router');
 var Login = require('./Login');
 var Dropdown = require('./Dropdowns');
 var Pages = require('./Pages');
+var AddingPage = require('./AddingPage');
 
 //main component
 var Main = React.createClass({
@@ -41,6 +42,9 @@ var Main = React.createClass({
 					<div className="row">
 
 						<Dropdown />
+					</div>
+
+					<div className="row">
 
 						<AddingPage />
   					</div>
@@ -50,7 +54,6 @@ var Main = React.createClass({
 							<Pages />
 					</div>
 
-					<Dropdown />
 
 
 				</main>
