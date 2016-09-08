@@ -6,7 +6,7 @@ var AddPage = React.createClass({
 
 	clickHandler: function() {
 
-		console.log('i work');
+		return console.log('i work');
 
 		//create object
 

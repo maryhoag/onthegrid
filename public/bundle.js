@@ -27412,7 +27412,7 @@
 
 		clickHandler: function clickHandler() {
 
-			console.log('i work');
+			return console.log('i work');
 
 			//create object
 
