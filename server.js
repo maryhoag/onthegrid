@@ -62,7 +62,7 @@ db.once('open', function callback() {
 	var userSchema = mongoose.Schema({
 		name: String,
 		avatar: String,
-		pages: Object
+		pages: String
 	});
 
 	//create collection for users
@@ -74,7 +74,7 @@ db.once('open', function callback() {
 		avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
 	});
 
-	testUser.add({pages: {'content here'} });
+	testUser.add({ pages: 'content here' });
 
 
 	//store docs in collection
