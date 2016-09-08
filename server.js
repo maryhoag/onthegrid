@@ -57,6 +57,24 @@ db.once('open', function callback() {
 
 	});
 
+	var userName = 'testUser';
+
+	var userSchema = userSchema.add({
+		name: String,
+		avatar: String,
+		pages: Object
+	});
+
+	//create collection for users
+	var User = mongoose.model('users', userSchema);
+
+	//seed data
+	var testUser = new User({
+		name: 'testUser',
+		avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
+	});
+
+
 	//store docs in collection
 	var Song = mongoose.model('songs', songSchema);
 	//seed data
@@ -67,6 +85,8 @@ db.once('open', function callback() {
 
 	//save
 	var promise = eighties.save();
+	var promise = testUser.save();
+	
 	//assert.ok(promise instanceof require('mpromise'));
 
 });
