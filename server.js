@@ -51,11 +51,11 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() {
 
 	//create test schema
-	var songSchema = mongoose.Schema({
-		decade: String,
-		artist: String,
+	// var songSchema = mongoose.Schema({
+	// 	decade: String,
+	// 	artist: String,
 
-	});
+	// });
 
 	var userName = 'testUser';
 
@@ -79,15 +79,15 @@ db.once('open', function callback() {
 
 
 	//store docs in collection
-	var Song = mongoose.model('songs', songSchema);
-	//seed data
-	var eighties = new Song({
-		decade: '1980s',
-		artist: 'The Cure'
-	});
+	// var Song = mongoose.model('songs', songSchema);
+	// //seed data
+	// var eighties = new Song({
+	// 	decade: '1980s',
+	// 	artist: 'The Cure'
+	// });
 
 	//save
-	var promise = eighties.save();
+	//var promise = eighties.save();
 	var promise = testUser.save();
 
 	//assert.ok(promise instanceof require('mpromise'));
