@@ -21422,6 +21422,10 @@
 	var Pages = __webpack_require__(280);
 	var AddPage = __webpack_require__(281);
 
+	// //include schema
+	// var User = require('../../models/User');
+	// var Post = require('../../models/Post');
+
 	//main component
 	var Main = React.createClass({
 		displayName: 'Main',
@@ -21431,11 +21435,17 @@
 
 			return {
 
-				loggedIn: false
+				loggedIn: false,
+				childVisible: false
 			};
 		},
 
-		clickHandler: function clickHandler() {
+		authHandler: function authHandler() {
+			//this gets changed when logged in
+			this.setState({ loggedIn: true });
+		},
+
+		addHandler: function addHandler() {
 
 			console.log('hi');
 		},
@@ -21474,7 +21484,7 @@
 				React.createElement(
 					'main',
 					null,
-					React.createElement(Login, null),
+					this.state.childVisible ? React.createElement(Login, { authHandler: this.authHandler }) : null,
 					React.createElement(
 						'div',
 						{ className: 'row' },
@@ -21488,7 +21498,7 @@
 							null,
 							'hello'
 						),
-						React.createElement(AddPage, { clickHandler: this.clickHandler })
+						React.createElement(AddPage, { clickHandler: this.addHandler })
 					),
 					React.createElement(
 						'div',
@@ -31366,19 +31376,6 @@
 			};
 		},
 
-		//call for pages info
-		//mongoose get returns
-
-		//render pages info
-
-		// for(var = i; i < list.length; i++) {
-
-		// 	<div>
-
-
-		// 	</div>
-		// }
-
 		render: function render() {
 
 			return React.createElement(
@@ -31442,17 +31439,6 @@
 		displayName: 'AddPage',
 
 
-		// clickHandler: function() {
-
-		// 	return console.log('i work');
-
-		//create object
-
-		//send to db
-
-
-		//},
-
 		render: function render() {
 
 			return React.createElement(
@@ -31478,7 +31464,7 @@
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler },
+					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.addHandler },
 					'Save',
 					React.createElement(
 						'i',

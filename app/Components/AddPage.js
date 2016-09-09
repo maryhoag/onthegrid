@@ -7,17 +7,6 @@ import { Button, Card, Row, Col } from 'react-materialize';
 var AddPage = React.createClass({
 
 
-	// clickHandler: function() {
-
-	// 	return console.log('i work');
-
-		//create object
-
-		//send to db
-
-
-	//},
-
 	render: function() {
 
 		return (
@@ -32,7 +21,7 @@ var AddPage = React.createClass({
 			      </div>
 			    </form>
 
-			    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.props.clickHandler}>Save
+			    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.props.addHandler}>Save
 				    <i className="material-icons right">send</i>
 				</button>
 			</div>

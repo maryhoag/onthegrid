@@ -13,19 +13,6 @@ var Pages = React.createClass({
 
 	},
 
-	//call for pages info
-		//mongoose get returns
-
-	//render pages info
-
-		// for(var = i; i < list.length; i++) {
-
-		// 	<div>
-
-
-		// 	</div>
-		// }
-
 	render: function() {
 
 		return (

@@ -52,6 +52,8 @@ db.once('open', function callback() {
 
 	console.log('mongoose connection successful');
 
+
+
 	//create test schema
 	// var songSchema = mongoose.Schema({
 	// 	decade: String,
@@ -95,6 +97,9 @@ db.once('open', function callback() {
 	//assert.ok(promise instanceof require('mpromise'));
 
 });
+
+var User = require('./models.User');
+var Post = require('./models.Post');
 
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;

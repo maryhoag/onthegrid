@@ -11,6 +11,8 @@ var Dropdown = require('./Dropdowns');
 var Pages = require('./Pages');
 var AddPage = require('./AddPage');
 
+
+
 //main component
 var Main = React.createClass({
 
@@ -18,12 +20,21 @@ var Main = React.createClass({
 
 		return {
 
-			loggedIn: false
+			loggedIn: false,
+			childVisible: false 
 		}
 
 	},
 
-	clickHandler: function() {
+	authHandler: function() {
+		//this gets changed when logged in
+		this.setState({ loggedIn: true });
+
+	},
+
+	addHandler: function() {
+
+
 
 		console.log('hi');
 	},
@@ -44,8 +55,13 @@ var Main = React.createClass({
 				</header>
 
 				<main>
+					{ this.state.childVisible
 
-					<Login />
+						? <Login authHandler={this.authHandler} />
+
+						:null
+
+					}
 
 					<div className="row">
 
@@ -55,7 +71,7 @@ var Main = React.createClass({
 					<div className="row">
 
 						<p>hello</p>
-						<AddPage clickHandler={this.clickHandler} />
+						<AddPage clickHandler={this.addHandler} />
   					</div>
 
 					<div className="row">
