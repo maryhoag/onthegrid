@@ -31478,7 +31478,7 @@
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler },
+					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler() },
 					'Save',
 					React.createElement(
 						'i',

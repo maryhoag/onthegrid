@@ -32,7 +32,7 @@ var AddPage = React.createClass({
 			      </div>
 			    </form>
 
-			    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.props.clickHandler}>Save
+			    <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.props.clickHandler()}>Save
 				    <i className="material-icons right">send</i>
 				</button>
 			</div>
