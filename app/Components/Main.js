@@ -1,6 +1,6 @@
 //include react
 var React = require('react');
-var Route = require('react-router');
+var Router = require('react-router');
 
 import { Button, Card, Row, Col } from 'react-materialize';
 

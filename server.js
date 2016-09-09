@@ -98,8 +98,8 @@ db.once('open', function callback() {
 
 });
 
-var User = require('./models.User');
-var Post = require('./models.Post');
+var User = require('./models/User');
+var Post = require('./models/Post');
 
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;
