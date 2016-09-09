@@ -22,6 +22,11 @@ var Main = React.createClass({
 		}
 
 	},
+
+	clickHandler: function() {
+
+		console.log('hi');
+	},
 	//render the function
 	render: function() {
 

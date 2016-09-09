@@ -21434,6 +21434,11 @@
 				loggedIn: false
 			};
 		},
+
+		clickHandler: function clickHandler() {
+
+			console.log('hi');
+		},
 		//render the function
 		render: function render() {
 
@@ -31437,15 +31442,16 @@
 		displayName: 'AddPage',
 
 
-		clickHandler: function clickHandler() {
+		// clickHandler: function() {
 
-			return console.log('i work');
+		// 	return console.log('i work');
 
-			//create object
+		//create object
 
-			//send to db
+		//send to db
 
-		},
+
+		//},
 
 		render: function render() {
 
@@ -31472,7 +31478,7 @@
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action' },
+					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler },
 					'Save',
 					React.createElement(
 						'i',
