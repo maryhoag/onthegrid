@@ -21494,7 +21494,7 @@
 							null,
 							'hello'
 						),
-						React.createElement(AddPage, { clickHandler: this.addHandler })
+						React.createElement(AddPage, { addHandler: this.addHandler })
 					),
 					React.createElement(
 						'div',
