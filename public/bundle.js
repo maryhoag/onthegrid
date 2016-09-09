@@ -21488,7 +21488,7 @@
 							null,
 							'hello'
 						),
-						React.createElement(AddPage, null)
+						React.createElement(AddPage, { clickHandler: this.clickHandler })
 					),
 					React.createElement(
 						'div',
@@ -31478,7 +31478,7 @@
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler() },
+					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.clickHandler },
 					'Save',
 					React.createElement(
 						'i',

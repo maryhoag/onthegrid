@@ -50,6 +50,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 db.once('open', function callback() {
 
+	console.log('mongoose connection successful');
+
 	//create test schema
 	// var songSchema = mongoose.Schema({
 	// 	decade: String,
@@ -57,23 +59,23 @@ db.once('open', function callback() {
 
 	// });
 
-	var userName = 'testUser';
+	// var userName = 'testUser';
 
-	var userSchema = mongoose.Schema({
-		name: String, //required: true },
-		avatar: String,
-		//TODO add: font, color, img
-		//pages: [ {body: String, date: Date, default: Date.now} ]
-	});
+	// var userSchema = mongoose.Schema({
+	// 	name: String, //required: true },
+	// 	avatar: String,
+	// 	//TODO add: font, color, img
+	// 	//pages: [ {body: String, date: Date, default: Date.now} ]
+	// });
 
-	//create collection for users
-	var User = mongoose.model('users', userSchema);
+	// //create collection for users
+	// var User = mongoose.model('users', userSchema);
 
-	//seed data
-	var testUser = new User({
-		name: 'testUser',
-		avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
-	});
+	// //seed data
+	// var testUser = new User({
+	// 	name: 'testUser',
+	// 	avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
+	// });
 
 	//testUser.add({ pages: 'content here' });
 
@@ -88,7 +90,7 @@ db.once('open', function callback() {
 
 	//save
 	//var promise = eighties.save();
-	var promise = testUser.save();
+	//var promise = testUser.save();
 
 	//assert.ok(promise instanceof require('mpromise'));
 

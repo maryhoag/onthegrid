@@ -55,7 +55,7 @@ var Main = React.createClass({
 					<div className="row">
 
 						<p>hello</p>
-						<AddPage />
+						<AddPage clickHandler={this.clickHandler} />
   					</div>
 
 					<div className="row">
