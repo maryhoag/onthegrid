@@ -21422,10 +21422,6 @@
 	var Pages = __webpack_require__(280);
 	var AddPage = __webpack_require__(281);
 
-	// //include schema
-	// var User = require('../../models/User');
-	// var Post = require('../../models/Post');
-
 	//main component
 	var Main = React.createClass({
 		displayName: 'Main',
