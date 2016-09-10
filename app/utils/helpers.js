@@ -1,14 +1,17 @@
-
+//var User = require('../../models/User.js');
+//var Post = require('../../models/Post.js');
 
 var addContent = function(content) {
 
-	this.add({ pages: content });
+	var post = new Post(content);
+
+	Post.add({ body: content });
 };
 
 
 var queryContent = function(userName) {
 	//searches for a single user
-	this.findOne({ 'name': 'testUser'} function(err, person) {
+	this.findOne({ 'name': 'testUser'}, function(err, person) {
 
 		if(err) return handleError(err);
 		console.log('%s', this.name);

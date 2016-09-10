@@ -21421,6 +21421,7 @@
 	var Dropdown = __webpack_require__(279);
 	var Pages = __webpack_require__(280);
 	var AddPage = __webpack_require__(281);
+	var helpers = __webpack_require__(282);
 
 	//main component
 	var Main = React.createClass({
@@ -21432,18 +21433,35 @@
 			return {
 
 				loggedIn: false,
-				childVisible: false
+				childVisible: false,
+				body: String
 			};
 		},
 
 		authHandler: function authHandler() {
 			//this gets changed when logged in
+			var email = document.getElementById('email').value;
+			//auth stuff
+
+			//set to logged in
 			this.setState({ loggedIn: true });
 		},
 
 		addHandler: function addHandler() {
+			//for js
+			var content = document.getElementById('body').value;
+			console.log(content);
 
-			console.log('hi');
+			//setState of the value on a change
+			//this.setState({this.body: event.target.value});
+			this.setState({ body: event.target.body });
+			console.log(body);
+			//this.setState({body: this.value});
+			//console.log(this.body);
+
+			helpers.addContent(body);
+
+			//console.log('hi');
 		},
 		//render the function
 		render: function render() {
@@ -21459,7 +21477,7 @@
 						{ className: 'row' },
 						React.createElement(
 							'div',
-							{ className: 'col s9' },
+							{ className: 'col s10' },
 							React.createElement(
 								'h1',
 								{ className: 'brand-logo center' },
@@ -21468,10 +21486,10 @@
 						),
 						React.createElement(
 							'div',
-							{ className: 'col s3' },
+							{ className: 'col s2' },
 							React.createElement(
 								'a',
-								{ className: 'waves-effect waves-light btn' },
+								{ className: 'waves-effect waves-light btn-flat' },
 								'log out'
 							)
 						)
@@ -21479,8 +21497,8 @@
 				),
 				React.createElement(
 					'main',
-					null,
-					this.state.childVisible ? React.createElement(Login, { authHandler: this.authHandler }) : null,
+					{ className: 'container' },
+					this.state.childVisible ? React.createElement(Login, { authHandler: this.authHandler, body: this.body }) : null,
 					React.createElement(
 						'div',
 						{ className: 'row' },
@@ -31376,41 +31394,54 @@
 
 			return React.createElement(
 				'div',
-				{ 'class': 'row' },
+				{ className: 'row' },
 				React.createElement(
 					'div',
-					{ 'class': 'col s12 m6' },
+					{ className: 'col s12 m6 post' },
 					React.createElement(
-						'div',
-						{ 'class': 'card blue-grey darken-1' },
-						React.createElement(
-							'div',
-							{ 'class': 'card-content white-text' },
-							React.createElement(
-								'span',
-								{ 'class': 'card-title' },
-								'Card Title'
-							),
-							React.createElement(
-								'p',
-								null,
-								'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.'
-							)
-						),
-						React.createElement(
-							'div',
-							{ 'class': 'card-action' },
-							React.createElement(
-								'a',
-								{ href: '#' },
-								'This is a link'
-							),
-							React.createElement(
-								'a',
-								{ href: '#' },
-								'This is a link'
-							)
-						)
+						'h4',
+						{ className: 'title' },
+						'Friday September 24, 2016'
+					),
+					React.createElement(
+						'p',
+						null,
+						'Lexie\'s birthday! We had cake and ice cream and went to Disney to watch the fireworks.'
+					),
+					React.createElement('img', { src: 'http://www.zillycakes.com/wp-content/uploads/2016/04/10-Fun-And-Creative-Ways-to-Bake-Your-Own-Birthday-Cake.jpg', height: '300', width: '350' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s12 m6 post' },
+					React.createElement(
+						'h4',
+						{ className: 'title' },
+						'To Do List'
+					),
+					React.createElement(
+						'p',
+						null,
+						'Rewatch Wonder Woman trailer for the thousandth time'
+					),
+					React.createElement(
+						'p',
+						null,
+						'Take puppy to the vet for booster shots'
+					),
+					React.createElement(
+						'p',
+						null,
+						'groceries'
+					),
+					React.createElement(
+						'p',
+						null,
+						'return shorts that Jeff doesn\'t like'
+					),
+					React.createElement(
+						'p',
+						null,
+						'research new phones to replace mine and Jackie\'s'
 					)
 				)
 			);
@@ -31449,7 +31480,7 @@
 						React.createElement(
 							'div',
 							{ className: 'input-field col s12' },
-							React.createElement('textarea', { id: 'textarea1', className: 'materialize-textarea' }),
+							React.createElement('textarea', { id: 'body', className: 'materialize-textarea' }),
 							React.createElement(
 								'label',
 								{ 'for': 'textarea1' },
@@ -31460,7 +31491,7 @@
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light', type: 'submit', name: 'action', onClick: this.props.addHandler },
+					{ className: 'btn waves-effect waves-light right', type: 'submit', name: 'action', onClick: this.props.addHandler },
 					'Save',
 					React.createElement(
 						'i',
@@ -31474,6 +31505,39 @@
 	});
 
 	module.exports = AddPage;
+
+/***/ },
+/* 282 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	//var User = require('../../models/User.js');
+	//var Post = require('../../models/Post.js');
+
+	var addContent = function addContent(content) {
+
+		var post = new Post(content);
+
+		Post.add({ body: content });
+	};
+
+	var queryContent = function queryContent(userName) {
+		//searches for a single user
+		this.findOne({ 'name': 'testUser' }, function (err, person) {
+
+			if (err) return handleError(err);
+			console.log('%s', this.name);
+		});
+	};
+
+	var findContent = function findContent(userName) {
+		this.find(function (err, users) {
+			if (err) return console.log(err);
+
+			console.log(results);
+		});
+	};
 
 /***/ }
 /******/ ]);

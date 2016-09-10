@@ -7,7 +7,6 @@ var Router = require('react-router')
 
 var Login = React.createClass({
 
-	
 
 	handleClick: function(item, event) {
 		console.log('clicked');
