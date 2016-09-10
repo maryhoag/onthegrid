@@ -13,12 +13,23 @@
   min-height: 100vh;
   flex-direction: column; }
 
+body {
+  background-color: #ECEAE1; }
+
 main {
   flex: 1 0 auto;
-  background-color: red; }
+  color: #151316;
+  font-family: "EB Garamond", serif; }
 
-footer {
-  background-color: blue; }
+footer.page-footer {
+  background-color: #ECEAE1;
+  color: #151316;
+  font-family: "EB Garamond", serif; }
 
 header {
-  background-color: green; }
+  background-color: #787760;
+  color: #A60000;
+  font-family: "Permanent Marker", cursive; }
+
+.post {
+  background-image: url("./images/gridme.png"); }

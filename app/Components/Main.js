@@ -10,6 +10,7 @@ var Login = require('./Login');
 var Dropdown = require('./Dropdowns');
 var Pages = require('./Pages');
 var AddPage = require('./AddPage');
+var helpers = require('../utils/helpers.js');
 
 
 
@@ -21,22 +22,38 @@ var Main = React.createClass({
 		return {
 
 			loggedIn: false,
-			childVisible: false 
+			childVisible: false,
+			body: String
 		}
 
 	},
 
 	authHandler: function() {
 		//this gets changed when logged in
+		var email = document.getElementById('email').value;
+		//auth stuff
+
+		//set to logged in
 		this.setState({ loggedIn: true });
 
 	},
 
 	addHandler: function() {
+		//for js
+		var content = document.getElementById('body').value;
+		console.log(content);
+
+		//setState of the value on a change
+		//this.setState({this.body: event.target.value});
+		this.setState({body: event.target.body})
+		console.log(body);
+		//this.setState({body: this.value});
+		//console.log(this.body);
+
+		helpers.addContent(body);
 
 
-
-		console.log('hi');
+		//console.log('hi');
 	},
 	//render the function
 	render: function() {
@@ -45,19 +62,19 @@ var Main = React.createClass({
 			<div id="page-wrap">
 				<header className="page-header">
 					<div className="row">
-						<div className="col s9">
+						<div className="col s10">
 							<h1 className="brand-logo center"> On The Grid </h1>
 						</div>
-						<div className="col s3">
-							<a className="waves-effect waves-light btn">log out</a>
+						<div className="col s2">
+							<a className="waves-effect waves-light btn-flat">log out</a>
 						</div>
 					</div>
 				</header>
 
-				<main>
+				<main className="container">
 					{ this.state.childVisible
 
-						? <Login authHandler={this.authHandler} />
+						? <Login authHandler={this.authHandler} body={this.body} />
 
 						:null
 

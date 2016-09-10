@@ -4,18 +4,26 @@
     flex-direction: column;
   }
 
+body {
+  background-color: $background;
+}
+
 main {
     flex: 1 0 auto;
-    background-color: red;
+    color: $text-color;
+    
+    font-family: $default-font;
   }
 
-  footer {
-
-  background-color: blue;
-        }
+footer.page-footer {
+  background-color: $background;
+  color: $text-color;
+  font-family: $default-font;
+}
 
 header {
-	
-	background-color: green;
+	background-color: $header-background;
+  color: $header-text;
+  font-family: $sharpie;
 }
 

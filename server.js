@@ -38,11 +38,11 @@ app.get('/', function(req, res){
 //create db connection
 
 //database connected to TEST
-//mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test');
 //heroku uri
 //MONGODB_URI: mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q
-var mongooseURI =  'mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q';
-mongoose.connect(mongooseURI);
+// var mongooseURI =  'mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q';
+// mongoose.connect(mongooseURI);
 
 var db = mongoose.connection;
 
