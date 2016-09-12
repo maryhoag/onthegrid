@@ -1,17 +1,19 @@
 //include react
 var React = require('react');
-var Router = require('react-router');
+//var Route = require('react-router');
 
+//import materialize styling via react-materialze
 import { Button, Card, Row, Col } from 'react-materialize';
 
 
 //include children
-var Login = require('./Login');
-var Dropdown = require('./Dropdowns');
-var Pages = require('./Pages');
-var AddPage = require('./AddPage');
-var helpers = require('../utils/helpers.js');
+var Login = require('./Children/Login');
+var Dropdown = require('./Children/Dropdowns');
+var Pages = require('./Children/Pages');
+var AddPage = require('./Children/AddPage');
 
+var axios = require('axios');
+var helpers = require('../utils/helpers.js');
 
 
 //main component
@@ -23,7 +25,10 @@ var Main = React.createClass({
 
 			loggedIn: false,
 			childVisible: false,
-			body: String
+			text: String,
+			font: String,
+			border: String,
+			borderColor: String,
 		}
 
 	},
@@ -38,22 +43,32 @@ var Main = React.createClass({
 
 	},
 
+	//adds data to the db
 	addHandler: function() {
 		//for js
-		var content = document.getElementById('body').value;
-		console.log(content);
+		// var content = document.getElementById('body').value;
+		// console.log(content);
 
-		//setState of the value on a change
-		//this.setState({this.body: event.target.value});
-		this.setState({body: event.target.body})
-		console.log(body);
-		//this.setState({body: this.value});
-		//console.log(this.body);
+		// this.setState({text: content})
+		// console.log(this.state);
 
-		helpers.addContent(body);
-
+		helpers.addContent();
 
 		//console.log('hi');
+		// axios.post('/user', {
+		//     text: content
+		//   })
+		//   .then(function (response) {
+		//     console.log(response);
+		//   })
+		//   .catch(function (error) {
+		//     console.log(error);
+		// });
+	},
+
+	logoutHandler: function() {
+
+		this.setState( {loggedIn: false} );
 	},
 	//render the function
 	render: function() {
@@ -73,7 +88,7 @@ var Main = React.createClass({
 
 				<main className="container">
 					{ this.state.childVisible
-
+						//hides component
 						? <Login authHandler={this.authHandler} body={this.body} />
 
 						:null

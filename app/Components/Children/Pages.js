@@ -29,8 +29,8 @@ var Pages = React.createClass({
         			<p>Rewatch Wonder Woman trailer for the thousandth time</p>
         			<p>Take puppy to the vet for booster shots</p>
         			<p>groceries</p>
-        			<p>return shorts that Jeff doesn't like</p>
-        			<p>research new phones to replace mine and Jackie's</p>
+        			<p>return shorts that Jeff doesnt like</p>
+        			<p>research new phones to replace mine and Jackie</p>
 		        
 		        </div>
 

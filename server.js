@@ -8,11 +8,9 @@ var bodyParser = require("body-parser");
 
 var logger = require('morgan');
 //var mongojs = require("mongojs");
-var mongoose = require("mongoose");
-
-//wtf does this mean? this isn't what we did in class
-//var databaseUrl = "location";
-//var collections = "search";
+var mongoose = require('mongoose');
+var axios = require('axios');
+var helpers =require('./app/utils/helpers.js');
 
 //creating an instance of express
 var app = express();
@@ -26,7 +24,13 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({type: "application/vnd.api + json"}));
 
 //allows access to the public folder
-app.use(express.static("./public"));
+app.use(express.static('./public'));
+
+var api = require('./public/api.js');
+app.post('/post', api.post);
+app.get('/post/:title.:format?', api.show);
+app.get('/post', api.list);
+
 
 
 // Main Route. This route will redirect to our rendered React application
@@ -45,6 +49,8 @@ mongoose.connect('mongodb://localhost/test');
 // mongoose.connect(mongooseURI);
 
 var db = mongoose.connection;
+
+//process.env.MONGODB_URI;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -98,8 +104,30 @@ db.once('open', function callback() {
 
 });
 
+
+
+
 var User = require('./models/User');
 var Post = require('./models/Post');
+
+//need axios
+app.post("/user", function(req,res,next){
+	var userInfo = req.body;
+
+	// res.send('user route running');
+	//res.render('./public/');
+
+	var newUser = new User(userInfo);
+	console.log('there is a new user' + userInfo);
+
+	// newUser.save(function (err) {
+	//   console.error(String(err)) 
+	
+	  console.log("server log");
+
+	 // });
+
+});
 
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;

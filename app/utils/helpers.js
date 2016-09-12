@@ -1,28 +1,36 @@
-//var User = require('../../models/User.js');
-//var Post = require('../../models/Post.js');
+var axios = require('axios');
 
-var addContent = function(content) {
+var helpers = {
 
-	var post = new Post(content);
 
-	Post.add({ body: content });
+	addContent: function() {
+		return axios.post('/user')
+			.then(function(response) {
+				console.log(response);
+			})
+	},
+
+
+	queryContent: function(userName) {
+		//searches for a single user
+		this.findOne({ 'name': 'testUser'}, function(err, person) {
+
+			if(err) return handleError(err);
+			console.log('%s', this.name);
+		}) 
+	},
+
+
+	findContent: function(userName) {
+		this.find(function(err, users) {
+			if(err) return console.log(err);
+
+			console.log(results);
+		})
+	}
+
 };
 
-
-var queryContent = function(userName) {
-	//searches for a single user
-	this.findOne({ 'name': 'testUser'}, function(err, person) {
-
-		if(err) return handleError(err);
-		console.log('%s', this.name);
-	}) 
-};
+module.exports = helpers;
 
 
-var findContent = function(userName) {
-	this.find(function(err, users) {
-		if(err) return console.log(err);
-
-		console.log(results);
-	})
-};
