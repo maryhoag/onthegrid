@@ -113,19 +113,20 @@ var Post = require('./models/Post');
 //need axios
 app.post("/user", function(req,res,next){
 	var userInfo = req.body;
+	console.log(req.body);
 
-	// res.send('user route running');
+	res.send(req.body);
 	//res.render('./public/');
 
 	var newUser = new User(userInfo);
-	console.log('there is a new user' + userInfo);
+	//console.log('there is a new user' + userInfo);
 
-	// newUser.save(function (err) {
-	//   console.error(String(err)) 
+	newUser.save(function (err) {
+	  console.error(String(err)) 
 	
 	  console.log("server log");
 
-	 // });
+	 });
 
 });
 

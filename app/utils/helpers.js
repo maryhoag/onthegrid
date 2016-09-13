@@ -3,10 +3,13 @@ var axios = require('axios');
 var helpers = {
 
 
-	addContent: function() {
+	addContent: function(content) {
 		return axios.post('/user')
 			.then(function(response) {
-				console.log(response);
+				//empty object
+				console.log('helpers ' + content);
+				//console.log("helpers" + response);
+
 			})
 	},
 
@@ -16,7 +19,7 @@ var helpers = {
 		this.findOne({ 'name': 'testUser'}, function(err, person) {
 
 			if(err) return handleError(err);
-			console.log('%s', this.name);
+			//console.log('%s', this.name);
 		}) 
 	},
 

@@ -19831,24 +19831,28 @@
 		//adds data to the db
 		addHandler: function addHandler() {
 			//for js
-			// var content = document.getElementById('body').value;
-			// console.log(content);
+			var content = document.getElementById('postBody');
+			//this is the input value
+			//console.log('main ' + content.value);
+			//this is undefined
+			this.text = content.value;
+			//console.log(this.text);
 
-			// this.setState({text: content})
-			// console.log(this.state);
 
-			helpers.addContent();
+			//this.setState({text: content.value})
+			//console.log(this.state);
 
-			//console.log('hi');
-			// axios.post('/user', {
-			//     text: content
-			//   })
-			//   .then(function (response) {
-			//     console.log(response);
-			//   })
-			//   .catch(function (error) {
-			//     console.log(error);
-			// });
+			helpers.addContent(this.text);
+
+			console.log('hi');
+			axios.post('/user', {
+				//empty key
+
+			}).then(function (response) {
+				console.log('response');
+			}).catch(function (error) {
+				console.log(error);
+			});
 		},
 
 		logoutHandler: function logoutHandler() {
@@ -51812,7 +51816,7 @@
 						React.createElement(
 							'div',
 							{ className: 'input-field col s12' },
-							React.createElement('textarea', { id: 'body', className: 'materialize-textarea' }),
+							React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
 							React.createElement(
 								'label',
 								{ 'for': 'textarea1' },
@@ -53129,9 +53133,11 @@
 
 	var helpers = {
 
-		addContent: function addContent() {
+		addContent: function addContent(content) {
 			return axios.post('/user').then(function (response) {
-				console.log(response);
+				//empty object
+				console.log('helpers ' + content);
+				//console.log("helpers" + response);
 			});
 		},
 
@@ -53140,7 +53146,7 @@
 			this.findOne({ 'name': 'testUser' }, function (err, person) {
 
 				if (err) return handleError(err);
-				console.log('%s', this.name);
+				//console.log('%s', this.name);
 			});
 		},
 
