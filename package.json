@@ -12,6 +12,7 @@
     "node-dev-env": "^2.1.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "react-dropdown": "^1.1.0",
     "react-materialize": "^0.16.4",
     "react-router": "^2.8.0",
     "request": "^2.74.0"

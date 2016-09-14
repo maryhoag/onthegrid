@@ -51821,6 +51821,62 @@
 								'What are you going to do today?'
 							)
 						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'input-field col m6 s12' },
+							React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
+							React.createElement(
+								'label',
+								{ 'for': 'image' },
+								'image URL '
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'input-field col m6 s12' },
+							React.createElement(
+								'a',
+								{ 'class': 'dropdown-button btn', href: '#', 'data-activates': 'dropdown1' },
+								'border'
+							),
+							React.createElement(
+								'ul',
+								{ id: 'dropdown1', 'class': 'dropdown-content' },
+								React.createElement(
+									'li',
+									null,
+									React.createElement(
+										'a',
+										{ href: '#!' },
+										'blue'
+									)
+								),
+								React.createElement(
+									'li',
+									null,
+									React.createElement(
+										'a',
+										{ href: '#!' },
+										'green'
+									)
+								),
+								React.createElement('li', { 'class': 'divider' }),
+								React.createElement(
+									'li',
+									null,
+									React.createElement(
+										'a',
+										{ href: '#!' },
+										'red'
+									)
+								)
+							),
+							'}'
+						)
 					)
 				),
 				React.createElement(
