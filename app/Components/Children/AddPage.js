@@ -15,7 +15,7 @@ var AddPage = React.createClass({
 			    <form className="col s12">
 			      <div className="row">
 			        <div className="input-field col s12">
-			          <textarea id="body" className="materialize-textarea"></textarea>
+			          <textarea id="postBody" className="materialize-textarea"></textarea>
 			          <label for="textarea1">What are you going to do today?</label>
 			        </div>
 			      </div>

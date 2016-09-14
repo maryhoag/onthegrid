@@ -46,24 +46,30 @@ var Main = React.createClass({
 	//adds data to the db
 	addHandler: function() {
 		//for js
-		// var content = document.getElementById('body').value;
-		// console.log(content);
+		var content = document.getElementById('postBody');
+		//this is the input value
+		//console.log('main ' + content.value);
+		//this is undefined
+		this.text = content.value;
+		//console.log(this.text);
 
-		// this.setState({text: content})
-		// console.log(this.state);
 
-		helpers.addContent();
+		//this.setState({text: content.value})
+		//console.log(this.state);
 
-		//console.log('hi');
-		// axios.post('/user', {
-		//     text: content
-		//   })
-		//   .then(function (response) {
-		//     console.log(response);
-		//   })
-		//   .catch(function (error) {
-		//     console.log(error);
-		// });
+		helpers.addContent(this.text);
+
+		console.log('hi');
+		axios.post('/user', {
+			//empty key
+		    
+		  })
+		  .then(function (response) {
+		    console.log('response');
+		  })
+		  .catch(function (error) {
+		    console.log(error);
+		});
 	},
 
 	logoutHandler: function() {
