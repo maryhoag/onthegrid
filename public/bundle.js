@@ -53134,10 +53134,8 @@
 	var helpers = {
 
 		addContent: function addContent(content) {
-			return axios.post('/user').then(function (response) {
-				//empty object
+			return axios.post('/user', content).then(function (response) {
 				console.log('helpers ' + content);
-				//console.log("helpers" + response);
 			});
 		},
 

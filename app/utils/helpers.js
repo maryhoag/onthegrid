@@ -4,12 +4,10 @@ var helpers = {
 
 
 	addContent: function(content) {
-		return axios.post('/user')
+		return axios.post('/user', content)
 			.then(function(response) {
-				//empty object
 				console.log('helpers ' + content);
-				//console.log("helpers" + response);
-
+				
 			})
 	},
 

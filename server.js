@@ -60,10 +60,10 @@ db.once('open', function callback() {
 
 
 
-	//create test schema
-	// var songSchema = mongoose.Schema({
-	// 	decade: String,
-	// 	artist: String,
+	//create user schema
+	// var userSchema = mongoose.Schema({
+	// 	name: String,
+	// 	other: String,
 
 	// });
 
@@ -113,15 +113,16 @@ var Post = require('./models/Post');
 //need axios
 app.post("/user", function(req,res,next){
 	var userInfo = req.body;
-	console.log(req.body);
+	console.log('server' + req.body);
 
 	res.send(req.body);
 	//res.render('./public/');
 
-	var newUser = new User(userInfo);
+	//var newUser = new User(userInfo);
 	//console.log('there is a new user' + userInfo);
+	var newPage = new Post(userInfo);
 
-	newUser.save(function (err) {
+	newPage.save(function (err) {
 	  console.error(String(err)) 
 	
 	  console.log("server log");
