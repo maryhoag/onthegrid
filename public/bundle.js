@@ -19845,10 +19845,8 @@
 			helpers.addContent(this.text);
 
 			console.log('hi');
-			axios.post('/user', {
-				//empty key
-
-			}).then(function (response) {
+			var myObject = { text: this.text };
+			axios.post('/user', myObject).then(function (response) {
 				console.log('response');
 			}).catch(function (error) {
 				console.log(error);

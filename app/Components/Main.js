@@ -60,10 +60,8 @@ var Main = React.createClass({
 		helpers.addContent(this.text);
 
 		console.log('hi');
-		axios.post('/user', {
-			//empty key
-		    
-		  })
+		var myObject = { text: this.text };
+		axios.post('/user', myObject)
 		  .then(function (response) {
 		    console.log('response');
 		  })
