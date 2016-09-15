@@ -11,18 +11,27 @@ var helpers = {
 			})
 	},
 
-
-	queryContent: function(userName) {
+	//finds user name
+	queryUser: function(userName) {
 		//searches for a single user
-		this.findOne({ 'name': 'testUser'}, function(err, person) {
+		return axios.get('/findUser', name)
+		.then(function(response) {
+			console.log('' + name);
+		})
+		// // this.findOne({ 'name': 'testUser'}, function(err, person) {
 
-			if(err) return handleError(err);
-			//console.log('%s', this.name);
-		}) 
+		// // 	if(err) return handleError(err);
+		// // 	//console.log('%s', this.name);
+		// }) 
 	},
 
-
+	//finds user content
 	findContent: function(userName) {
+		//instead of name should search by user id?
+		return axios.get('/findPosts', name)
+		.then(function(response) {
+			console.log('')
+		})
 		this.find(function(err, users) {
 			if(err) return console.log(err);
 

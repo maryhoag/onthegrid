@@ -1,8 +1,6 @@
 var React = require('react');
-var Route = require('react-router');
 
 import { Button, Card, Row, Col } from 'react-materialize';
-
 
 var AddPage = React.createClass({
 
@@ -13,31 +11,48 @@ var AddPage = React.createClass({
 
 			<div className="row">
 			    <form className="col s12">
+			    	{/* input for post title */}
+			    	<div className="row">
+						<div className="input-field col m6 s12">
+							<textarea id="postTitle" className="materialize-textarea"></textarea>
+							<label for="postTitle">Title</label>
+				
+							<div className="input-field col s6">
+						    	<nav>
+							      	<ul>
+							      		<li><a href="#">Border Color</a>
+							      			<ul>
+							      				<li><a href="#">blue</a></li>
+							      				<li><a href="#">red</a></li>
+							      				<li><a href="#">green</a></li>
+							      			</ul>
+							      		</li>
+							      	</ul>
+							    </nav>
+							</div>
+					</div>
+						      
+
+					    
+				{/* input for post body */}
 			      <div className="row">
 			        <div className="input-field col s12">
 			          <textarea id="postBody" className="materialize-textarea"></textarea>
 			          <label for="textarea1">What are you going to do today?</label>
 			        </div>
 			      </div>
-
+			  		{/* input for an image */}
 			      <div className="row">
 			      	<div className="input-field col m6 s12">
 			      		<textarea id="imageURL" className="materialize-textarea"></textarea>
 			      		<label for="image">image URL </label>
 			      	</div>
-			      	<div className="input-field col m6 s12">
-			      		{/* dropdown button */}
-			      		<a class='dropdown-button btn' href='#' data-activates='dropdown1'>border</a>
-						  {/* Dropdown Structure */}
-						  <ul id='dropdown1' class='dropdown-content'>
-						    <li><a href="#!">blue</a></li>
-						    <li><a href="#!">green</a></li>
-						    <li class="divider"></li>
-						    <li><a href="#!">red</a></li>
-						  </ul>
-			      		}
-			      	</div>
 			      </div>
+			      	
+
+			    </div>
+
+
 
 			    </form>
 

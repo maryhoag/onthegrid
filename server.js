@@ -131,6 +131,19 @@ app.post("/user", function(req,res,next){
 
 });
 
+app.get('/findUser', function(req, res, next) {
+	var userName = req.body;
+	console.log('server findUser' + req.body);
+
+	res.send(req.body)
+});
+
+app.get('/findPosts', function(req, res, next) {
+	var postBundle = req.body;
+	console.log(req.body);
+	
+})
+
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;
 // 	}

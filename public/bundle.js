@@ -1161,7 +1161,7 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 
-	var invariant = function invariant(condition, format, a, b, c, d, e, f) {
+	function invariant(condition, format, a, b, c, d, e, f) {
 	  if (process.env.NODE_ENV !== 'production') {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
@@ -1175,15 +1175,16 @@
 	    } else {
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
-	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	      error = new Error(format.replace(/%s/g, function () {
 	        return args[argIndex++];
 	      }));
+	      error.name = 'Invariant Violation';
 	    }
 
 	    error.framesToPop = 1; // we don't care about invariant's own frame
 	    throw error;
 	  }
-	};
+	}
 
 	module.exports = invariant;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
@@ -8061,6 +8062,10 @@
 	  }
 	};
 
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+
 	var ReactEmptyComponent = function ReactEmptyComponent(instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -8069,7 +8074,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function construct(element) {},
 	  mountComponent: function mountComponent(rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -9421,6 +9426,7 @@
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9454,8 +9460,6 @@
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9466,7 +9470,11 @@
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 
@@ -10631,8 +10639,8 @@
 	     */
 	    // autoCapitalize and autoCorrect are supported in Mobile Safari for
 	    // keyboard hints.
-	    autoCapitalize: null,
-	    autoCorrect: null,
+	    autoCapitalize: MUST_USE_ATTRIBUTE,
+	    autoCorrect: MUST_USE_ATTRIBUTE,
 	    // autoSave allows WebKit/Blink to persist values of input fields on page reloads
 	    autoSave: null,
 	    // color is for Safari mask-icon link
@@ -10663,9 +10671,7 @@
 	    httpEquiv: 'http-equiv'
 	  },
 	  DOMPropertyNames: {
-	    autoCapitalize: 'autocapitalize',
 	    autoComplete: 'autocomplete',
-	    autoCorrect: 'autocorrect',
 	    autoFocus: 'autofocus',
 	    autoPlay: 'autoplay',
 	    autoSave: 'autosave',
@@ -13327,7 +13333,10 @@
 	      }
 	    });
 
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+
 	    return nativeProps;
 	  }
 
@@ -13754,7 +13763,7 @@
 	    var value = LinkedValueUtils.getValue(props);
 
 	    if (value != null) {
-	      updateOptions(this, props, value);
+	      updateOptions(this, Boolean(props.multiple), value);
 	    }
 	  }
 	}
@@ -16797,11 +16806,14 @@
 	 * @typechecks
 	 */
 
+	/* eslint-disable fb-www/typeof-undefined */
+
 	/**
 	 * Same as document.activeElement but wraps in a try-catch block. In IE it is
 	 * not safe to call document.activeElement if there is nothing focused.
 	 *
-	 * The activeElement will be null only if the document or document body is not yet defined.
+	 * The activeElement will be null only if the document or document body is not
+	 * yet defined.
 	 */
 	'use strict';
 
@@ -16809,7 +16821,6 @@
 	  if (typeof document === 'undefined') {
 	    return null;
 	  }
-
 	  try {
 	    return document.activeElement || document.body;
 	  } catch (e) {
@@ -18553,7 +18564,9 @@
 	  'setValueForProperty': 'update attribute',
 	  'setValueForAttribute': 'update attribute',
 	  'deleteValueForProperty': 'remove attribute',
-	  'dangerouslyReplaceNodeWithMarkupByID': 'replace'
+	  'setValueForStyles': 'update styles',
+	  'replaceNodeWithMarkup': 'replace',
+	  'updateTextContent': 'set textContent'
 	};
 
 	function getTotalTime(measurements) {
@@ -18745,18 +18758,23 @@
 	'use strict';
 
 	var performance = __webpack_require__(145);
-	var curPerformance = performance;
+
+	var performanceNow;
 
 	/**
 	 * Detect if we can use `window.performance.now()` and gracefully fallback to
 	 * `Date.now()` if it doesn't exist. We need to support Firefox < 15 for now
 	 * because of Facebook's testing infrastructure.
 	 */
-	if (!curPerformance || !curPerformance.now) {
-	  curPerformance = Date;
+	if (performance.now) {
+	  performanceNow = function performanceNow() {
+	    return performance.now();
+	  };
+	} else {
+	  performanceNow = function performanceNow() {
+	    return Date.now();
+	  };
 	}
-
-	var performanceNow = curPerformance.now.bind(curPerformance);
 
 	module.exports = performanceNow;
 
@@ -18805,7 +18823,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.3';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 147 */
@@ -19787,14 +19805,13 @@
 
 	//include react
 	var React = __webpack_require__(1);
-	//var Route = require('react-router');
 
 	//import materialize styling via react-materialze
 
 
 	//include children
 	var Login = __webpack_require__(373);
-	var Dropdown = __webpack_require__(437);
+
 	var Pages = __webpack_require__(438);
 	var AddPage = __webpack_require__(439);
 
@@ -19815,17 +19832,17 @@
 				text: String,
 				font: String,
 				border: String,
-				borderColor: String
+				borderColor: String,
+				//options for border color
+				options: ['red', 'blue', 'green'],
+
+				defaultBorderOption: 'blue',
+				//options for font
+				fontOptions: ['EB Garramond', 'Permanent Marker', 'Bad Script'],
+
+				fauntDefault: 'serif'
+
 			};
-		},
-
-		authHandler: function authHandler() {
-			//this gets changed when logged in
-			var email = document.getElementById('email').value;
-			//auth stuff
-
-			//set to logged in
-			this.setState({ loggedIn: true });
 		},
 
 		//adds data to the db
@@ -19851,6 +19868,16 @@
 			}).catch(function (error) {
 				console.log(error);
 			});
+		},
+
+		_onBorderSelect: function _onBorderSelect(borderColor) {
+			//this.setState({borderColor: this.borderColor});
+
+		},
+
+		_onFontSelect: function _onFontSelect(font) {
+			//this.setState({font: this.font});
+
 		},
 
 		logoutHandler: function logoutHandler() {
@@ -19898,17 +19925,12 @@
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						React.createElement(Dropdown, null)
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
 						React.createElement(
 							'p',
 							null,
 							'hello'
 						),
-						React.createElement(AddPage, { addHandler: this.addHandler })
+						React.createElement(AddPage, { addHandler: this.addHandler, options: this.state.options, defaultOption: this.state.defaultOption, _onFontSelect: this.state._onFontSelect, _onBorderSelect: this.state._onBorderSelect, font: this.state.font, borderColor: this.state.borderColor, fontDefault: this.state.defaultFontOption, defaultBorderOption: this.state.defaultBorderOption })
 					),
 					React.createElement(
 						'div',
@@ -51622,87 +51644,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 437 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _reactMaterialize = __webpack_require__(160);
-
-	var React = __webpack_require__(1);
-	var Route = __webpack_require__(374);
-
-	var Dropdown = React.createClass({
-	    displayName: 'Dropdown',
-
-	    getInitialState: function getInitialState() {
-	        return {
-	            listVisible: false
-	        };
-	    },
-
-	    select: function select(item) {
-	        this.props.selected = item;
-	    },
-
-	    show: function show() {
-	        this.setState({ listVisible: true });
-	        document.addEventListener("click", this.hide);
-	    },
-
-	    hide: function hide() {
-	        this.setState({ listVisible: false });
-	        document.removeEventListener("click", this.hide);
-	    },
-
-	    render: function render() {
-	        return (
-	            // <div className={"dropdown-container" + (this.state.listVisible ? " show" : "")}>
-	            // <div className={"dropdown-display" + (this.state.listVisible ? " clicked": "")} onClick={this.show}>
-	            // <span style={{ color: this.props.selected.hex }}>{this.props.selected.name}</span>
-	            // <i className="fa fa-angle-down"></i>
-	            // </div>
-	            // <div className="dropdown-list">
-	            // <div>
-	            // {this.renderListItems()} 
-	            // </div>
-	            // </div>
-	            // </div>
-	            // 
-	            React.createElement(
-	                'div',
-	                null,
-	                ' '
-	            )
-	        );
-	    }
-
-	    // renderListItems: function() {
-	    //     var items = [];
-	    //     for (var i = 0; i < this.props.list.length; i++) {
-	    //         var item = this.props.list[i];
-	    //         items.push(<div onClick={this.select.bind(null, item)}>
-	    //             <span style={{ color: item.hex }}>{item.name}</span>
-	    //         </div>);
-	    //     }
-	    //     return items;
-	    // }
-	});
-
-	var colours = [{
-	    name: "Red",
-	    hex: "#F21B1B"
-	}, {
-	    name: "Blue",
-	    hex: "#1B66F2"
-	}, {
-	    name: "Green",
-	    hex: "#07BA16"
-	}];
-
-	module.exports = Dropdown;
-
-/***/ },
+/* 437 */,
 /* 438 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -51794,7 +51736,6 @@
 	var _reactMaterialize = __webpack_require__(160);
 
 	var React = __webpack_require__(1);
-	var Route = __webpack_require__(374);
 
 	var AddPage = React.createClass({
 		displayName: 'AddPage',
@@ -51813,69 +51754,93 @@
 						{ className: 'row' },
 						React.createElement(
 							'div',
-							{ className: 'input-field col s12' },
-							React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
-							React.createElement(
-								'label',
-								{ 'for': 'textarea1' },
-								'What are you going to do today?'
-							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
 							{ className: 'input-field col m6 s12' },
-							React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
+							React.createElement('textarea', { id: 'postTitle', className: 'materialize-textarea' }),
 							React.createElement(
 								'label',
-								{ 'for': 'image' },
-								'image URL '
+								{ 'for': 'postTitle' },
+								'Title'
+							),
+							React.createElement(
+								'div',
+								{ className: 'input-field col s6' },
+								React.createElement(
+									'nav',
+									null,
+									React.createElement(
+										'ul',
+										null,
+										React.createElement(
+											'li',
+											null,
+											React.createElement(
+												'a',
+												{ href: '#' },
+												'Border Color'
+											),
+											React.createElement(
+												'ul',
+												null,
+												React.createElement(
+													'li',
+													null,
+													React.createElement(
+														'a',
+														{ href: '#' },
+														'blue'
+													)
+												),
+												React.createElement(
+													'li',
+													null,
+													React.createElement(
+														'a',
+														{ href: '#' },
+														'red'
+													)
+												),
+												React.createElement(
+													'li',
+													null,
+													React.createElement(
+														'a',
+														{ href: '#' },
+														'green'
+													)
+												)
+											)
+										)
+									)
+								)
 							)
 						),
 						React.createElement(
 							'div',
-							{ className: 'input-field col m6 s12' },
+							{ className: 'row' },
 							React.createElement(
-								'a',
-								{ 'class': 'dropdown-button btn', href: '#', 'data-activates': 'dropdown1' },
-								'border'
-							),
-							React.createElement(
-								'ul',
-								{ id: 'dropdown1', 'class': 'dropdown-content' },
+								'div',
+								{ className: 'input-field col s12' },
+								React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
 								React.createElement(
-									'li',
-									null,
-									React.createElement(
-										'a',
-										{ href: '#!' },
-										'blue'
-									)
-								),
-								React.createElement(
-									'li',
-									null,
-									React.createElement(
-										'a',
-										{ href: '#!' },
-										'green'
-									)
-								),
-								React.createElement('li', { 'class': 'divider' }),
-								React.createElement(
-									'li',
-									null,
-									React.createElement(
-										'a',
-										{ href: '#!' },
-										'red'
-									)
+									'label',
+									{ 'for': 'textarea1' },
+									'What are you going to do today?'
 								)
-							),
-							'}'
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'row' },
+							React.createElement(
+								'div',
+								{ className: 'input-field col m6 s12' },
+								React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
+								React.createElement(
+									'label',
+									{ 'for': 'image' },
+									'image URL '
+								)
+							)
 						)
 					)
 				),
@@ -53193,16 +53158,25 @@
 			});
 		},
 
-		queryContent: function queryContent(userName) {
+		//finds user name
+		queryUser: function queryUser(userName) {
 			//searches for a single user
-			this.findOne({ 'name': 'testUser' }, function (err, person) {
-
-				if (err) return handleError(err);
-				//console.log('%s', this.name);
+			return axios.get('/findUser', name).then(function (response) {
+				console.log('' + name);
 			});
+			// // this.findOne({ 'name': 'testUser'}, function(err, person) {
+
+			// // 	if(err) return handleError(err);
+			// // 	//console.log('%s', this.name);
+			// }) 
 		},
 
+		//finds user content
 		findContent: function findContent(userName) {
+			//instead of name should search by user id?
+			return axios.get('/findPosts', name).then(function (response) {
+				console.log('');
+			});
 			this.find(function (err, users) {
 				if (err) return console.log(err);
 

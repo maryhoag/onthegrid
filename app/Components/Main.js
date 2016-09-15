@@ -1,6 +1,6 @@
 //include react
 var React = require('react');
-//var Route = require('react-router');
+
 
 //import materialize styling via react-materialze
 import { Button, Card, Row, Col } from 'react-materialize';
@@ -8,7 +8,7 @@ import { Button, Card, Row, Col } from 'react-materialize';
 
 //include children
 var Login = require('./Children/Login');
-var Dropdown = require('./Children/Dropdowns');
+
 var Pages = require('./Children/Pages');
 var AddPage = require('./Children/AddPage');
 
@@ -29,17 +29,23 @@ var Main = React.createClass({
 			font: String,
 			border: String,
 			borderColor: String,
+			//options for border color
+			options: [
+
+				'red', 'blue', 'green' 
+			],
+
+			defaultBorderOption: 'blue',
+			//options for font
+			fontOptions: [
+				'EB Garramond', 'Permanent Marker', 'Bad Script'
+
+
+			],
+
+			fauntDefault: 'serif'
+
 		}
-
-	},
-
-	authHandler: function() {
-		//this gets changed when logged in
-		var email = document.getElementById('email').value;
-		//auth stuff
-
-		//set to logged in
-		this.setState({ loggedIn: true });
 
 	},
 
@@ -68,6 +74,16 @@ var Main = React.createClass({
 		  .catch(function (error) {
 		    console.log(error);
 		});
+	},
+
+	_onBorderSelect: function(borderColor) {
+		//this.setState({borderColor: this.borderColor});
+
+	},
+
+	_onFontSelect: function(font) {
+		//this.setState({font: this.font});
+
 	},
 
 	logoutHandler: function() {
@@ -99,15 +115,11 @@ var Main = React.createClass({
 
 					}
 
-					<div className="row">
-
-						<Dropdown />
-					</div>
 
 					<div className="row">
 
 						<p>hello</p>
-						<AddPage addHandler={this.addHandler} />
+						<AddPage addHandler={this.addHandler} options={this.state.options} defaultOption={this.state.defaultOption} _onFontSelect={this.state._onFontSelect} _onBorderSelect={this.state._onBorderSelect} font={this.state.font} borderColor={this.state.borderColor} fontDefault={this.state.defaultFontOption} defaultBorderOption={this.state.defaultBorderOption} />
   					</div>
 
 					<div className="row">
