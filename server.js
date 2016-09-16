@@ -43,6 +43,7 @@ app.get('/', function(req, res){
 
 //database connected to TEST
 mongoose.connect('mongodb://localhost/test');
+mongoose.Promise = global.Promise;
 //heroku uri
 //MONGODB_URI: mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q
 // var mongooseURI =  'mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q';
@@ -112,20 +113,21 @@ var Post = require('./models/Post');
 
 //need axios
 app.post("/user", function(req,res,next){
-	var userInfo = req.body;
-	console.log('server' + req.body);
+	var userInfo = req.body
+	console.log('server' + req.body.text);
 
-	res.send(req.body);
+	
 	//res.render('./public/');
 
 	//var newUser = new User(userInfo);
 	//console.log('there is a new user' + userInfo);
 	var newPage = new Post(userInfo);
 
-	newPage.save(function (err) {
+	newPage.save(function (err, savedObj) {
 	  console.error(String(err)) 
 	
 	  console.log("server log");
+	  res.send(savedObj);
 
 	 });
 
@@ -141,8 +143,9 @@ app.get('/findUser', function(req, res, next) {
 app.get('/findPosts', function(req, res, next) {
 	var postBundle = req.body;
 	console.log(req.body);
-	
+
 })
+
 
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;

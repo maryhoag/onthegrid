@@ -58,8 +58,8 @@ p {
   text-align: center; }
 
 nav {
-  margin: 50px 0;
-  background-color: #E64A19; }
+  margin: 10px 0;
+  background-color: #A60000; }
 
 nav ul {
   padding: 0;
@@ -111,3 +111,12 @@ li > a:after {
 
 li > a:only-child:after {
   content: ''; }
+
+.adding {
+  border: dotted;
+  padding: 5px;
+  border-color: #787760;
+  background-image: url("./images/gridme.png"); }
+
+#submit {
+  background-color: #A60000; }

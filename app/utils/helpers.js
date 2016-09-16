@@ -3,10 +3,10 @@ var axios = require('axios');
 var helpers = {
 
 
-	addContent: function(content) {
-		return axios.post('/user', content)
+	addContent: function(contentObj) {
+		return axios.post('/user', contentObj)
 			.then(function(response) {
-				console.log('helpers ' + content);
+				console.log('helpers ' + response);
 				
 			})
 	},
@@ -37,6 +37,20 @@ var helpers = {
 
 			console.log(results);
 		})
+	},
+
+	//page template
+	createPage: function(font, borderColor, title, text, image) {
+
+		//need to do this via parent function with .map()
+
+		var myPage = '<div className="col s12 m6 post">';
+		myPage += '<h4 className="title"> {title} </h4>';
+		myPage += '<p> {text} </p>';
+		myPage += '<img src={image} height="300" width="350"></img>';
+		myPage += '<p className="right"> {date} </p>';
+		myPage += '</div>';
+
 	}
 
 };

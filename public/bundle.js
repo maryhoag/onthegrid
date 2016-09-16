@@ -19812,8 +19812,9 @@
 	//include children
 	var Login = __webpack_require__(373);
 
-	var Pages = __webpack_require__(438);
-	var AddPage = __webpack_require__(439);
+	var Pages = __webpack_require__(437);
+	var AddPage = __webpack_require__(438);
+	var Story = __webpack_require__(439);
 
 	var axios = __webpack_require__(440);
 	var helpers = __webpack_require__(462);
@@ -19829,10 +19830,14 @@
 
 				loggedIn: false,
 				childVisible: false,
+				addPageVisible: false,
 				text: String,
 				font: String,
 				border: String,
 				borderColor: String,
+				date: String,
+				title: String,
+				image: String,
 				//options for border color
 				options: ['red', 'blue', 'green'],
 
@@ -19840,39 +19845,62 @@
 				//options for font
 				fontOptions: ['EB Garramond', 'Permanent Marker', 'Bad Script'],
 
-				fauntDefault: 'serif'
+				fauntDefault: 'serif',
+				contentObj: Object
 
 			};
 		},
 
 		//adds data to the db
 		addHandler: function addHandler() {
+			console.log('fire');
 			//for js
 			var content = document.getElementById('postBody');
-			//this is the input value
-			//console.log('main ' + content.value);
-			//this is undefined
+			var titleContent = document.getElementById('postTitle');
+			var imgContent = document.getElementById('imageURL');
+
+			var mytitle = titleContent.value;
+			this.title = titleContent.value;
+			console.log(this.title);
+
+			var mytext = content.value;
 			this.text = content.value;
-			//console.log(this.text);
+			console.log(this.text);
+			var myimg = imgContent.value;
+			this.imageURL = imgContent.value;
+			console.log(this.imageURL);
 
+			// this.setState({text: content.value})
+			// console.log(this.text);
+			// this.setState({title: titleContent.value})
+			// this.setState({imageURL: imgContent.value})
+			// console.log(this.state);
 
-			//this.setState({text: content.value})
-			//console.log(this.state);
+			// this.contentObj =
+			// 	{
+			// 	text: this.text,
+			// 	title: this.title,
+			// 	image: this.imageURL
+			// 	}
+			var contentObj = { text: mytext, title: mytitle, image: myimg };
+			//var contentObj = {text: this.text, title: this.title, image: this.imageURL})
 
-			helpers.addContent(this.text);
-
-			console.log('hi');
-			var myObject = { text: this.text };
-			axios.post('/user', myObject).then(function (response) {
-				console.log('response');
-			}).catch(function (error) {
-				console.log(error);
-			});
+			helpers.addContent(contentObj);
 		},
 
-		_onBorderSelect: function _onBorderSelect(borderColor) {
-			//this.setState({borderColor: this.borderColor});
+		_onBorderSelect: function _onBorderSelect() {
+			// this.setState({borderColor: this.borderColor});
+			// console.log('state set to ' + this.borderColor);
+			var colors = document.getElementById;
+			console.log(containerent.value);
+			this.setState({ borderColor: this.value });
+			console.log("btn works");
+		},
 
+		blueButton: function blueButton() {
+			document.getElementById('blue');
+			this.borderColor = content.value;
+			console.log(content.value + 'blueButton');
 		},
 
 		_onFontSelect: function _onFontSelect(font) {
@@ -19884,6 +19912,7 @@
 
 			this.setState({ loggedIn: false });
 		},
+
 		//render the function
 		render: function render() {
 
@@ -19914,23 +19943,25 @@
 								'log out'
 							)
 						)
-					)
+					),
+					React.createElement(
+						'p',
+						{ className: 'left' },
+						'hello'
+					),
+					' '
 				),
 				React.createElement(
 					'main',
 					{ className: 'container' },
+					React.createElement(Story, null),
 					this.state.childVisible
 					//hides component
 					? React.createElement(Login, { authHandler: this.authHandler, body: this.body }) : null,
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						React.createElement(
-							'p',
-							null,
-							'hello'
-						),
-						React.createElement(AddPage, { addHandler: this.addHandler, options: this.state.options, defaultOption: this.state.defaultOption, _onFontSelect: this.state._onFontSelect, _onBorderSelect: this.state._onBorderSelect, font: this.state.font, borderColor: this.state.borderColor, fontDefault: this.state.defaultFontOption, defaultBorderOption: this.state.defaultBorderOption })
+						React.createElement(AddPage, { addHandler: this.addHandler, options: this.state.options, defaultOption: this.state.defaultOption, _onFontSelect: this.state._onFontSelect, _onBorderSelect: this.state._onBorderSelect, font: this.state.font, borderColor: this.state.borderColor, fontDefault: this.state.defaultFontOption, defaultBorderOption: this.state.defaultBorderOption, blueButton: this.state.blueButton, contentObj: this.state.contentObj })
 					),
 					React.createElement(
 						'div',
@@ -51644,8 +51675,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 437 */,
-/* 438 */
+/* 437 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51670,7 +51700,7 @@
 
 			return React.createElement(
 				'div',
-				{ className: 'row' },
+				null,
 				React.createElement(
 					'div',
 					{ className: 'col s12 m6 post' },
@@ -51692,7 +51722,7 @@
 					React.createElement(
 						'h4',
 						{ className: 'title' },
-						'To Do List'
+						'To Do List '
 					),
 					React.createElement(
 						'p',
@@ -51719,6 +51749,30 @@
 						null,
 						'research new phones to replace mine and Jackie'
 					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'col s12 m6 post' },
+					React.createElement(
+						'h4',
+						{ className: 'title' },
+						' Movies I want to Watch '
+					),
+					React.createElement(
+						'p',
+						null,
+						' Wonder Woman '
+					),
+					React.createElement(
+						'p',
+						null,
+						' Star Wars '
+					),
+					React.createElement(
+						'p',
+						null,
+						' stuff '
+					)
 				)
 			);
 		}
@@ -51728,7 +51782,7 @@
 	module.exports = Pages;
 
 /***/ },
-/* 439 */
+/* 438 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51741,112 +51795,64 @@
 		displayName: 'AddPage',
 
 
+		// if (this.state.showPages){
+		// 			pagesNodes = <div className="pages-list"> {pages}</div>;
+
+		// }
 		render: function render() {
 
 			return React.createElement(
 				'div',
-				{ className: 'row' },
+				{ className: 'row adding' },
 				React.createElement(
 					'form',
-					{ className: 'col s12' },
+					null,
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'input-field col s12 m6' },
+							React.createElement('textarea', { id: 'postTitle', className: 'materialize-textarea' }),
+							React.createElement(
+								'label',
+								{ htmlFor: 'postTitle' },
+								'Title'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'input-field col s12' },
+							React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
+							React.createElement(
+								'label',
+								{ htmlFor: 'textarea1' },
+								'What are you going to do today?'
+							)
+						)
+					),
 					React.createElement(
 						'div',
 						{ className: 'row' },
 						React.createElement(
 							'div',
 							{ className: 'input-field col m6 s12' },
-							React.createElement('textarea', { id: 'postTitle', className: 'materialize-textarea' }),
+							React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
 							React.createElement(
 								'label',
-								{ 'for': 'postTitle' },
-								'Title'
-							),
-							React.createElement(
-								'div',
-								{ className: 'input-field col s6' },
-								React.createElement(
-									'nav',
-									null,
-									React.createElement(
-										'ul',
-										null,
-										React.createElement(
-											'li',
-											null,
-											React.createElement(
-												'a',
-												{ href: '#' },
-												'Border Color'
-											),
-											React.createElement(
-												'ul',
-												null,
-												React.createElement(
-													'li',
-													null,
-													React.createElement(
-														'a',
-														{ href: '#' },
-														'blue'
-													)
-												),
-												React.createElement(
-													'li',
-													null,
-													React.createElement(
-														'a',
-														{ href: '#' },
-														'red'
-													)
-												),
-												React.createElement(
-													'li',
-													null,
-													React.createElement(
-														'a',
-														{ href: '#' },
-														'green'
-													)
-												)
-											)
-										)
-									)
-								)
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'row' },
-							React.createElement(
-								'div',
-								{ className: 'input-field col s12' },
-								React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
-								React.createElement(
-									'label',
-									{ 'for': 'textarea1' },
-									'What are you going to do today?'
-								)
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'row' },
-							React.createElement(
-								'div',
-								{ className: 'input-field col m6 s12' },
-								React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
-								React.createElement(
-									'label',
-									{ 'for': 'image' },
-									'image URL '
-								)
+								{ htmlFor: 'image' },
+								'image URL '
 							)
 						)
 					)
 				),
 				React.createElement(
 					'button',
-					{ className: 'btn waves-effect waves-light right', type: 'submit', name: 'action', onClick: this.props.addHandler },
+					{ id: 'submit', className: 'btn waves-effect waves-light right', type: 'submit', name: 'action', onClick: this.props.addHandler },
 					'Save',
 					React.createElement(
 						'i',
@@ -51860,6 +51866,47 @@
 	});
 
 	module.exports = AddPage;
+
+/***/ },
+/* 439 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(1);
+
+	var Story = function (_React$Component) {
+		_inherits(Story, _React$Component);
+
+		function Story() {
+			_classCallCheck(this, Story);
+
+			return _possibleConstructorReturn(this, (Story.__proto__ || Object.getPrototypeOf(Story)).apply(this, arguments));
+		}
+
+		_createClass(Story, [{
+			key: 'render',
+			value: function render() {
+				return React.createElement(
+					'p',
+					null,
+					' hiya '
+				);
+			}
+		}]);
+
+		return Story;
+	}(React.Component);
+
+	module.exports = Story;
 
 /***/ },
 /* 440 */
@@ -53152,9 +53199,9 @@
 
 	var helpers = {
 
-		addContent: function addContent(content) {
-			return axios.post('/user', content).then(function (response) {
-				console.log('helpers ' + content);
+		addContent: function addContent(contentObj) {
+			return axios.post('/user', contentObj).then(function (response) {
+				console.log('helpers ' + response);
 			});
 		},
 
@@ -53182,6 +53229,19 @@
 
 				console.log(results);
 			});
+		},
+
+		//page template
+		createPage: function createPage(font, borderColor, title, text, image) {
+
+			//need to do this via parent function with .map()
+
+			var myPage = '<div className="col s12 m6 post">';
+			myPage += '<h4 className="title"> {title} </h4>';
+			myPage += '<p> {text} </p>';
+			myPage += '<img src={image} height="300" width="350"></img>';
+			myPage += '<p className="right"> {date} </p>';
+			myPage += '</div>';
 		}
 
 	};

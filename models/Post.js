@@ -8,7 +8,8 @@ var PostSchema = new Schema({
 	font: String,
 	color: String,
 	highlightColor: String,
-	borderFont: String
+	borderFont: String,
+	title: String
 });
 
 

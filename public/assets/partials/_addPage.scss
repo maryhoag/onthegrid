@@ -43,8 +43,8 @@ p {
 }
 
 nav {
-	margin: 50px 0;
-	background-color: #E64A19;
+	margin: 10px 0;
+	background-color: $header-text;
 }
 
 nav ul {
@@ -103,3 +103,16 @@ nav ul ul ul li {
 /* Change this in order to change the Dropdown symbol */
 li > a:after { content:  ' +'; }
 li > a:only-child:after { content: ''; }
+
+
+.adding {
+	border: dotted;
+	padding: 5px;
+	border-color: $header-background;
+	background-image: url('./images/gridme.png') /* subtlepatterns.com*/;
+}
+
+#submit {
+	background-color: $header-text;
+
+}

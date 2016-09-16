@@ -11,6 +11,7 @@ var Login = require('./Children/Login');
 
 var Pages = require('./Children/Pages');
 var AddPage = require('./Children/AddPage');
+var Story = require('./Children/Story');
 
 var axios = require('axios');
 var helpers = require('../utils/helpers.js');
@@ -25,10 +26,14 @@ var Main = React.createClass({
 
 			loggedIn: false,
 			childVisible: false,
+			addPageVisible: false,
 			text: String,
 			font: String,
 			border: String,
 			borderColor: String,
+			date: String,
+			title: String,
+			image: String,
 			//options for border color
 			options: [
 
@@ -43,7 +48,8 @@ var Main = React.createClass({
 
 			],
 
-			fauntDefault: 'serif'
+			fauntDefault: 'serif',
+			contentObj: Object
 
 		}
 
@@ -51,34 +57,55 @@ var Main = React.createClass({
 
 	//adds data to the db
 	addHandler: function() {
+		console.log('fire')
 		//for js
 		var content = document.getElementById('postBody');
-		//this is the input value
-		//console.log('main ' + content.value);
-		//this is undefined
+		var titleContent = document.getElementById('postTitle');
+		var imgContent = document.getElementById('imageURL');
+		
+		var mytitle = titleContent.value;
+		this.title = titleContent.value;
+		console.log(this.title);
+
+		var mytext = content.value;
 		this.text = content.value;
-		//console.log(this.text);
+		console.log(this.text);
+		var myimg = imgContent.value;
+		this.imageURL = imgContent.value;
+		console.log(this.imageURL);
+		
+		// this.setState({text: content.value})
+		// console.log(this.text);
+		// this.setState({title: titleContent.value})
+		// this.setState({imageURL: imgContent.value})
+		// console.log(this.state);
 
+		// this.contentObj =
+		// 	{
+		// 	text: this.text,
+		// 	title: this.title,
+		// 	image: this.imageURL
+		// 	}
+		var contentObj = {text: mytext, title: mytitle, image: myimg};
+		//var contentObj = {text: this.text, title: this.title, image: this.imageURL})
 
-		//this.setState({text: content.value})
-		//console.log(this.state);
-
-		helpers.addContent(this.text);
-
-		console.log('hi');
-		var myObject = { text: this.text };
-		axios.post('/user', myObject)
-		  .then(function (response) {
-		    console.log('response');
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		});
+		helpers.addContent(contentObj);
 	},
 
-	_onBorderSelect: function(borderColor) {
-		//this.setState({borderColor: this.borderColor});
+	_onBorderSelect: function() {
+		// this.setState({borderColor: this.borderColor});
+		// console.log('state set to ' + this.borderColor);
+		var colors = document.getElementById
+		console.log(containerent.value);
+		this.setState({borderColor: this.value})
+		console.log("btn works");
 
+	},
+
+	blueButton: function() {
+		document.getElementById('blue');
+		this.borderColor = content.value;
+		console.log(content.value + 'blueButton')
 	},
 
 	_onFontSelect: function(font) {
@@ -104,9 +131,12 @@ var Main = React.createClass({
 							<a className="waves-effect waves-light btn-flat">log out</a>
 						</div>
 					</div>
+					<p className="left">hello</p> {/* add user name here */}
 				</header>
 
 				<main className="container">
+
+					<Story />
 					{ this.state.childVisible
 						//hides component
 						? <Login authHandler={this.authHandler} body={this.body} />
@@ -118,8 +148,7 @@ var Main = React.createClass({
 
 					<div className="row">
 
-						<p>hello</p>
-						<AddPage addHandler={this.addHandler} options={this.state.options} defaultOption={this.state.defaultOption} _onFontSelect={this.state._onFontSelect} _onBorderSelect={this.state._onBorderSelect} font={this.state.font} borderColor={this.state.borderColor} fontDefault={this.state.defaultFontOption} defaultBorderOption={this.state.defaultBorderOption} />
+						<AddPage addHandler={this.addHandler} options={this.state.options} defaultOption={this.state.defaultOption} _onFontSelect={this.state._onFontSelect} _onBorderSelect={this.state._onBorderSelect} font={this.state.font} borderColor={this.state.borderColor} fontDefault={this.state.defaultFontOption} defaultBorderOption={this.state.defaultBorderOption} blueButton={this.state.blueButton}  contentObj={this.state.contentObj} />
   					</div>
 
 					<div className="row">
