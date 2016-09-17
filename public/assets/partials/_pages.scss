@@ -1,5 +1,18 @@
 .post {
 	background-image: url('./images/gridme.png') /* subtlepatterns.com*/;
 	margin: 10px;
+}
 
+.title {
+	color: $header-text;
+	font: $script;
+}
+
+.icons {
+	color: $happy
+}
+
+.date {
+	position: absolute;
+    bottom: 0;
 }

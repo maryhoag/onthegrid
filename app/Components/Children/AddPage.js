@@ -29,7 +29,7 @@ var AddPage = React.createClass({
 						      	<ul>
 						      		<li><a href="#">Border Color</a>
 						      			<ul id="borderColor">
-						      				<li><a href='#' value="blue" onClick={this.props._onBorderSelect} > blue </a></li>
+						      				<li><a href='#' className="colorChoice" value="blue" onClick={this.props._onBorderSelect} > blue </a></li>
 						      				<li><a href="#" value="red" onClick={this.props._onBorderSelect} >red</a></li>
 						      				<li><a href="#" value="green" onClick={this.props._onBorderSelect} >green</a></li>
 						      			</ul>

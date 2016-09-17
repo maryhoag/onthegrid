@@ -18,14 +18,17 @@ var Pages = React.createClass({
 		}
 
 		var pagesNodes = this.props.posts.map(function(post) {
+			console.log(post)
 	      return (
 
-	      	<div key={post._id} className="post col s6">
-	          <h3> {post.title} </h3>
 
-	          <p> {post.text} </p>
-	          <img src={post.imageURL} />
-	          <p className="right"> {post.date} </p>
+	      	<div key={post._id} className="post col s12">
+	      	<p className="left icons"><i className="material-icons right">label_outline</i></p>
+	          <h3 className="title"> {post.title} </h3>
+
+	          <p className="text"> {post.text} </p>
+	          <img src={post.image} height="300" width="350" />
+	          <p className="right date"> {post.date} </p>
 	        </div>
 	        
 	      )});
@@ -36,7 +39,7 @@ var Pages = React.createClass({
 
 			<div className="row">
 
-			    <div className="post col s12">
+			    <div className="#postGroup col s12">
 		        <h3>Pages</h3>
 		        	<div>
 		        		{pagesNodes}

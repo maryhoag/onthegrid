@@ -35,6 +35,17 @@ header {
   background-image: url("./images/gridme.png");
   margin: 10px; }
 
+.title {
+  color: #A60000;
+  font: "Bad Script", cursive; }
+
+.icons {
+  color: blue; }
+
+.date {
+  position: absolute;
+  bottom: 0; }
+
 body {
   line-height: 32px;
   word-wrap: break-word !important; }

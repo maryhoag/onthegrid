@@ -21539,7 +21539,7 @@
 		_onBorderSelect: function _onBorderSelect() {
 			// this.setState({borderColor: this.borderColor});
 			// console.log('state set to ' + this.borderColor);
-			var colors = document.getElementById('#borderColor');
+			var colors = document.getElementById('.colorsChoice');
 
 			this.setState({ borderColor: colors });
 			console.log("btn works");
@@ -21666,8 +21666,8 @@
 						{ id: 'loadPages' },
 						React.createElement(
 							'a',
-							{ className: 'waves-light waves-effect btn-flat', id: 'addPageButton', name: 'action', onClick: this.pageLoadHandler },
-							' load pages '
+							{ className: 'waves-light waves-effect btn-flat left disabled', id: 'morePagesButton', name: 'action', onClick: this.pageLoadHandler },
+							' load more pages '
 						)
 					),
 					React.createElement(
@@ -32273,27 +32273,37 @@
 			}
 
 			var pagesNodes = this.props.posts.map(function (post) {
+				console.log(post);
 				return React.createElement(
 					'div',
-					{ key: post._id, className: 'post col s6' },
+					{ key: post._id, className: 'post col s12' },
+					React.createElement(
+						'p',
+						{ className: 'left icons' },
+						React.createElement(
+							'i',
+							{ className: 'material-icons right' },
+							'label_outline'
+						)
+					),
 					React.createElement(
 						'h3',
-						null,
+						{ className: 'title' },
 						' ',
 						post.title,
 						' '
 					),
 					React.createElement(
 						'p',
-						null,
+						{ className: 'text' },
 						' ',
 						post.text,
 						' '
 					),
-					React.createElement('img', { src: post.imageURL }),
+					React.createElement('img', { src: post.image, height: '300', width: '350' }),
 					React.createElement(
 						'p',
-						{ className: 'right' },
+						{ className: 'right date' },
 						' ',
 						post.date,
 						' '
@@ -32309,7 +32319,7 @@
 					{ className: 'row' },
 					React.createElement(
 						'div',
-						{ className: 'post col s12' },
+						{ className: '#postGroup col s12' },
 						React.createElement(
 							'h3',
 							null,
@@ -32394,7 +32404,7 @@
 												null,
 												React.createElement(
 													'a',
-													{ href: '#', value: 'blue', onClick: this.props._onBorderSelect },
+													{ href: '#', className: 'colorChoice', value: 'blue', onClick: this.props._onBorderSelect },
 													' blue '
 												)
 											),

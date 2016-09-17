@@ -73,7 +73,7 @@ var Main = React.createClass({
 	_onBorderSelect: function() {
 		// this.setState({borderColor: this.borderColor});
 		// console.log('state set to ' + this.borderColor);
-		var colors = document.getElementById('#borderColor');
+		var colors = document.getElementById('.colorsChoice');
 		
 		this.setState({borderColor: colors})
 		console.log("btn works");
@@ -169,7 +169,7 @@ var Main = React.createClass({
 					</div>
 
 					<div id="loadPages">
-						<a className="waves-light waves-effect btn-flat" id="addPageButton" name="action" onClick={this.pageLoadHandler} > load pages </a>
+						<a className="waves-light waves-effect btn-flat left disabled" id="morePagesButton" name="action" onClick={this.pageLoadHandler} > load more pages </a>
 					</div>
 					
 

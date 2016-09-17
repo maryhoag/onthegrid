@@ -94,7 +94,7 @@ app.get('/findPosts', function(req, res, next) {
 	console.log('i ran too');
 
 	Post.find() //users: userid
-	.limit(10)
+	//.limit(10)
 	.sort({ date: -1 })
 	.exec(function(err, posts) {
 			if (err) { return console.error(err) }
