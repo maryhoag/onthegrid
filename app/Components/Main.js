@@ -73,9 +73,9 @@ var Main = React.createClass({
 	_onBorderSelect: function() {
 		// this.setState({borderColor: this.borderColor});
 		// console.log('state set to ' + this.borderColor);
-		var colors = document.getElementById
-		console.log(containerent.value);
-		this.setState({borderColor: this.value})
+		var colors = document.getElementById('#borderColor');
+		
+		this.setState({borderColor: colors})
 		console.log("btn works");
 	},
 

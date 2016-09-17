@@ -58,49 +58,6 @@ db.once('open', function callback() {
 	console.log('mongoose connection successful');
 
 
-
-	//create user schema
-	// var userSchema = mongoose.Schema({
-	// 	name: String,
-	// 	other: String,
-
-	// });
-
-	// var userName = 'testUser';
-
-	// var userSchema = mongoose.Schema({
-	// 	name: String, //required: true },
-	// 	avatar: String,
-	// 	//TODO add: font, color, img
-	// 	//pages: [ {body: String, date: Date, default: Date.now} ]
-	// });
-
-	// //create collection for users
-	// var User = mongoose.model('users', userSchema);
-
-	// //seed data
-	// var testUser = new User({
-	// 	name: 'testUser',
-	// 	avatar: 'http://images6.fanpop.com/image/photos/32100000/Random-photography-32132073-493-328.jpg',
-	// });
-
-	//testUser.add({ pages: 'content here' });
-
-
-	//store docs in collection
-	// var Song = mongoose.model('songs', songSchema);
-	// //seed data
-	// var eighties = new Song({
-	// 	decade: '1980s',
-	// 	artist: 'The Cure'
-	// });
-
-	//save
-	//var promise = eighties.save();
-	//var promise = testUser.save();
-
-	//assert.ok(promise instanceof require('mpromise'));
-
 });
 
 var User = require('./models/User');
@@ -146,82 +103,8 @@ app.get('/findPosts', function(req, res, next) {
 
 				res.send(posts)
 		});
- //  		//select({ name: 1, occupation: 1 })
- //  		.then(
-		  	//console.log(res.body);
-		  	//res.send('finding posts');
-
-    //console.log(res.body);
-		 
+ 
 });
-
-
-
-// 	mongoose.connection.db.close(err) {
-// 		if(err) throw err;
-// 	}
-// });
-
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   // we're connected!
-//   console.log('we are connected');
-// });
-
-// //database test data
-// var kittySchema = mongoose.Schema({
-//     name: String
-// });
-
-
-// kittySchema.methods.speak = function () {
-//   var greeting = this.name
-//     ? "Meow name is " + this.name
-//     : "I don't have a name";
-//   console.log(greeting);
-// }
-
-// kittySchema.methods.hi = function() {
-// 	console.log('hiya');
-// }
-
-
-// //new model
-// var Kitten = mongoose.model('Kitten', kittySchema);
-
-// //creates new kitten
-// var silence = new Kitten({ name: 'Silence' });
-// console.log(silence.name); // 'Silence'
-
-//silence.speak();
-
-// silence.hi();
-
-// //actually saves the kitten to the db
-// silence.save(function (err, silence) {
-//   if (err) return console.error(err);
-//   silence.speak();
-//   console.log('hi');
-// });
-
-// //Kitten.find({ name: /^Silence/ }, callback);
-
-
-// var kittySchema = mongoose.Schema({
-//     name: String
-// });
-
-// var Kitten = mongoose.model('Kitten', kittySchema);
-
-// var silence = new Kitten({ name: 'Silence' });
-// console.log(silence.name); // 'Silence'
-
-//GET route or in routes folder?
-
-//POST route
-
-//DELETE route
 
 
 app.listen(PORT, function() {

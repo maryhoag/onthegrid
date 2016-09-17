@@ -22,8 +22,9 @@ var Pages = React.createClass({
 
 	      	<div key={post._id} className="post col s6">
 	          <h3> {post.title} </h3>
+
 	          <p> {post.text} </p>
-	          
+	          <img src={post.imageURL} />
 	          <p className="right"> {post.date} </p>
 	        </div>
 	        

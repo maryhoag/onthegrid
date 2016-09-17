@@ -21539,9 +21539,9 @@
 		_onBorderSelect: function _onBorderSelect() {
 			// this.setState({borderColor: this.borderColor});
 			// console.log('state set to ' + this.borderColor);
-			var colors = document.getElementById;
-			console.log(containerent.value);
-			this.setState({ borderColor: this.value });
+			var colors = document.getElementById('#borderColor');
+
+			this.setState({ borderColor: colors });
 			console.log("btn works");
 		},
 
@@ -32290,6 +32290,7 @@
 						post.text,
 						' '
 					),
+					React.createElement('img', { src: post.imageURL }),
 					React.createElement(
 						'p',
 						{ className: 'right' },
@@ -32393,7 +32394,7 @@
 												null,
 												React.createElement(
 													'a',
-													{ id: 'blue', className: 'btn waves-effect waves-light', value: 'blue', onClick: this.props.blueButton },
+													{ href: '#', value: 'blue', onClick: this.props._onBorderSelect },
 													' blue '
 												)
 											),
@@ -32414,8 +32415,7 @@
 													{ href: '#', value: 'green', onClick: this.props._onBorderSelect },
 													'green'
 												)
-											),
-											'borderColor.map()'
+											)
 										)
 									),
 									React.createElement(
