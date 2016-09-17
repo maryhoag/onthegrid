@@ -21534,6 +21534,14 @@
 			var contentObj = { text: mytext, title: mytitle, image: myimg, date: mydate };
 			//and sends it to helpers to be stored in db
 			helpers.addContent(contentObj);
+
+			this.setState({
+				addPageVisible: !this.state.addPageVisible
+			});
+
+			postBody.val('');
+			postTitle.val('');
+			imageURL.val('');
 		},
 
 		_onBorderSelect: function _onBorderSelect() {
@@ -21659,11 +21667,7 @@
 							'a',
 							{ className: 'waves-light waves-effect btn-flat', id: 'addPageButton', name: 'action', onClick: this._addPageModal },
 							' add a page '
-						)
-					),
-					React.createElement(
-						'div',
-						{ id: 'loadPages' },
+						),
 						React.createElement(
 							'a',
 							{ className: 'waves-light waves-effect btn-flat left disabled', id: 'morePagesButton', name: 'action', onClick: this.pageLoadHandler },
@@ -32300,14 +32304,7 @@
 						post.text,
 						' '
 					),
-					React.createElement('img', { src: post.image, height: '300', width: '350' }),
-					React.createElement(
-						'p',
-						{ className: 'right date' },
-						' ',
-						post.date,
-						' '
-					)
+					React.createElement('img', { src: post.image, height: '300', width: '350' })
 				);
 			});
 			console.log('pages nodes are ', pagesNodes);

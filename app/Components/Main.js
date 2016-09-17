@@ -68,6 +68,15 @@ var Main = React.createClass({
 		var contentObj = {text: mytext, title: mytitle, image: myimg, date: mydate};
 		//and sends it to helpers to be stored in db
 		helpers.addContent(contentObj);
+
+		this.setState({
+			addPageVisible: !this.state.addPageVisible
+		})
+
+		postBody.val('');
+		postTitle.val('');
+		imageURL.val('');
+
 	},
 
 	_onBorderSelect: function() {
@@ -166,10 +175,8 @@ var Main = React.createClass({
 				<main className="container">
 					<div id="buttonCentered">
 						<a className="waves-light waves-effect btn-flat" id="addPageButton" name="action" onClick={this._addPageModal} > add a page </a>
-					</div>
+												<a className="waves-light waves-effect btn-flat left disabled" id="morePagesButton" name="action" onClick={this.pageLoadHandler} > load more pages </a>
 
-					<div id="loadPages">
-						<a className="waves-light waves-effect btn-flat left disabled" id="morePagesButton" name="action" onClick={this.pageLoadHandler} > load more pages </a>
 					</div>
 					
 

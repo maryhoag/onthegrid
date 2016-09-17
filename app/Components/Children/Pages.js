@@ -28,7 +28,7 @@ var Pages = React.createClass({
 
 	          <p className="text"> {post.text} </p>
 	          <img src={post.image} height="300" width="350" />
-	          <p className="right date"> {post.date} </p>
+	          
 	        </div>
 	        
 	      )});
