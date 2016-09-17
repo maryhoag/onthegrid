@@ -11,7 +11,6 @@ var Pages = require('./Children/Pages');
 var AddPage = require('./Children/AddPage');
 var Story = require('./Children/Story');
 
-var axios = require('axios');
 var helpers = require('../utils/helpers.js');
 
 //main component
@@ -22,7 +21,7 @@ var Main = React.createClass({
 		return {
 
 			loggedIn: true,
-			childVisible: false,
+			childVisible: true,
 			addPageVisible: false,
 			text: String,
 			font: String,
@@ -36,20 +35,17 @@ var Main = React.createClass({
 
 				'red', 'blue', 'green' 
 			],
-
 			defaultBorderOption: 'blue',
 			//options for font
 			fontOptions: [
 				'EB Garramond', 'Permanent Marker', 'Bad Script'
-
-
 			],
-
 			fauntDefault: 'serif',
 			contentObj: Object,
-			pagesList: Array
+			pagesList: Array,
+			posts: [],
+			myposts: []
 		}
-
 	},
 
 	//adds form data to the db
@@ -72,8 +68,6 @@ var Main = React.createClass({
 		var contentObj = {text: mytext, title: mytitle, image: myimg, date: mydate};
 		//and sends it to helpers to be stored in db
 		helpers.addContent(contentObj);
-
-		
 	},
 
 	_onBorderSelect: function() {
@@ -83,7 +77,6 @@ var Main = React.createClass({
 		console.log(containerent.value);
 		this.setState({borderColor: this.value})
 		console.log("btn works");
-
 	},
 
 	blueButton: function() {
@@ -97,14 +90,29 @@ var Main = React.createClass({
 
 	},
 
+	componentDidMount: function(){
+		this.searching();
+	},
+
+	loginHandler: function() {
+		var userName = document.getElementById('#username');
+		var userPassword = document.getElementById('#password');
+
+		var userObj = {name: userName, password: userPassword};
+		helpers.userLogin();
+		this.setState( {loggedIn: true} )
+		this.setState( {childVisible: false} )
+	},
+
 	_logoutHandler: function() {
 
-		this.setState( {loggedIn: false} );
+		this.setState( {loggedIn: false} )
 	},
 
 	getDefaultProps: function() {
 	    return {
-	      loggedIn: false
+	      loggedIn: true,
+	      childVisible: true
 	    };
 	},
 
@@ -118,39 +126,28 @@ var Main = React.createClass({
 		console.log(this.state.addPageVisible);
 	},
 
-	getPages: function() {
+	searching: function() {
+		var that = this;
 
-		const pagesList = [
-			{ title: hello }
-		];
-
-		return pagesList.map((page) => {
-
-			return(
-
-				<Page 
-
-					title={page.title} date={page.date} body={page.text} image={page.image} key={page._id} />
-			);
-		});
-
+		if (this.props.loggedIn == true) {
+			helpers.findContent()
+			.then(function(posts){
+			console.log('searching');
+			console.log('posts are',posts)
+			
+			that.setState({posts: posts})
+			});
+		}
 	},
 
-	// searching: function() {
+	pageLoadHandler: function() {
+		helpers.findContent();
 
-	// 	if (this.props.loggedIn == true) {
-	// 		helpers.findContent();
-
-	// 		console.log('searching');
-	// 		this.setState(pageList = pageList)
-	// 		console.log(pagesList);
-	// 	}
-
-	// },
+			this.setState({posts: myposts})
+	},
 
 	//render the function
 	render: function() {
-
 
 		return (
 			<div id="page-wrap">
@@ -170,13 +167,11 @@ var Main = React.createClass({
 					<div id="buttonCentered">
 						<a className="waves-light waves-effect btn-flat" id="addPageButton" name="action" onClick={this._addPageModal} > add a page </a>
 					</div>
-					{ this.state.childVisible
-						//hides component
-						? <Login authHandler={this.authHandler} body={this.body} />
 
-						:null
-
-					}
+					<div id="loadPages">
+						<a className="waves-light waves-effect btn-flat" id="addPageButton" name="action" onClick={this.pageLoadHandler} > load pages </a>
+					</div>
+					
 
 						<div className="row">
 						{ this.state.addPageVisible
@@ -192,7 +187,7 @@ var Main = React.createClass({
 
 					{this.state.loggedIn
 
-							? <Pages loggedIn={this.state.loggedIn} pagesList={this.state.pagesList} searching={this.state.searaching} />
+							? <Pages posts={this.state.posts} loggedIn={this.state.loggedIn} pagesList={this.state.pagesList} searching={this.state.searaching} />
 
 							:null
 

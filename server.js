@@ -142,6 +142,8 @@ app.get('/findPosts', function(req, res, next) {
 	.exec(function(err, posts) {
 			if (err) { return console.error(err) }
 
+				console.log('server sending');
+
 				res.send(posts)
 		});
  //  		//select({ name: 1, occupation: 1 })

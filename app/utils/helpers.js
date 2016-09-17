@@ -2,6 +2,13 @@ var axios = require('axios');
 
 var helpers = {
 
+	addUser: function(userObject) {
+
+		return axios.post('/userLogin', userObject)
+			.then(function(resposne) {
+
+			})
+	},
 
 	addContent: function(contentObj) {
 		//takes input object from React and sends to db
@@ -9,7 +16,6 @@ var helpers = {
 			.then(function(response) {
 				//confirms success
 				console.log('helpers ' + response);
-				
 			})
 	},
 
@@ -30,34 +36,17 @@ var helpers = {
 	//finds user content
 	findContent: function() {
 		//instead of name should search by user id? deleted params for username
+		console.log('find me');
 		return axios.get('/findPosts')
 		.then(function(res) {
-			console.log(res);
+			console.log('res is',res);
+
+			var posts = res.data;
 			//console.log('helping' + res);
-
-			var posts = res.dataTypes;
 			return posts
-
-			//console.log('helpers' + posts);
 		})
 	},
-
-	//page template
-	// createPage: function(font, borderColor, title, text, image) {
-
-	// 	//need to do this via parent function with .map()
-
-	// 	var myPage = '<div className="col s12 m6 post">';
-	// 	myPage += '<h4 className="title"> {title} </h4>';
-	// 	myPage += '<p> {text} </p>';
-	// 	myPage += '<img src={image} height="300" width="350"></img>';
-	// 	myPage += '<p className="right"> {date} </p>';
-	// 	myPage += '</div>';
-
-	// }
 
 };
 
 module.exports = helpers;
-
-

@@ -8,36 +8,56 @@ var Router = require('react-router')
 var Login = React.createClass({
 
 
-	handleClick: function(item, event) {
-		console.log('clicked');
-		console.log(item);
-
-		auth.login();
-
-
-
-	},
-
 	render: function() {
 		return(
 
 		
 		<div className="jumbotron">
 
-			<h3>Login With Google</h3> 
+			<h3>Login</h3> 
 			<div className="row">
-		        <div className="input-field col s12">
-		          <input id="email" type="email" className="validate" />
-		          <label for="email">Enter Your Gmail</label>
-		        </div>
-		    </div>
-		    <button className="btn btn-flat waves-effect waves-light" type="submit" name="action">Submit
-    			<i className="material-icons right"> send </i>  {/*this won't work without jquery? */}
- 	 		</button>
+				<form id="login">
 
+				<div className="row">
+			        <div className="input-field col s6">
+				        <h3> Login </h3>
+			        	<div>
+				          <input id="username" type="text" className="validate" > </input>
+				          <label for="username">username</label>
+				        </div>
+
+				        <div>
+				        	<input id="password" type="text" className="validate" > </input>
+				        	<label for="password"> password </label>
+				        </div>
+				    </div>
+
+				    <div className="input-field col s6">
+				    	<h3> Create User </h3>
+				    	<div>
+				    		<input id="username" type="text" className="validate" > </input>
+				          	<label for="username">username</label>
+				        </div>
+
+				        <div>
+				        	<input id="password" type="text" className="validate" > </input>
+				        	<label for="password"> password </label>
+				        </div>
+				        <div>
+				        	<input id="cpassword" type="text" className="validate" > </input>
+				        	<label for="password"> confirm password </label>
+				        </div>
+
+				    </div>
+				</div>
+			    <button className="btn btn-flat waves-effect waves-light" type="submit" name="action">Submit
+	    			<i className="material-icons right"> send </i> 
+	    		</button>
+
+	    		</form>
 		</div>
 
-
+	</div>
 		)
 	}
 

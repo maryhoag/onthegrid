@@ -21480,8 +21480,7 @@
 	var AddPage = __webpack_require__(281);
 	var Story = __webpack_require__(282);
 
-	var axios = __webpack_require__(283);
-	var helpers = __webpack_require__(305);
+	var helpers = __webpack_require__(283);
 
 	//main component
 	var Main = React.createClass({
@@ -21493,7 +21492,7 @@
 			return {
 
 				loggedIn: true,
-				childVisible: false,
+				childVisible: true,
 				addPageVisible: false,
 				text: String,
 				font: String,
@@ -21504,14 +21503,14 @@
 				image: String,
 				//options for border color
 				options: ['red', 'blue', 'green'],
-
 				defaultBorderOption: 'blue',
 				//options for font
 				fontOptions: ['EB Garramond', 'Permanent Marker', 'Bad Script'],
-
 				fauntDefault: 'serif',
 				contentObj: Object,
-				pagesList: Array
+				pagesList: Array,
+				posts: [],
+				myposts: []
 			};
 		},
 
@@ -21557,6 +21556,20 @@
 
 		},
 
+		componentDidMount: function componentDidMount() {
+			this.searching();
+		},
+
+		loginHandler: function loginHandler() {
+			var userName = document.getElementById('#username');
+			var userPassword = document.getElementById('#password');
+
+			var userObj = { name: userName, password: userPassword };
+			helpers.userLogin();
+			this.setState({ loggedIn: true });
+			this.setState({ childVisible: false });
+		},
+
 		_logoutHandler: function _logoutHandler() {
 
 			this.setState({ loggedIn: false });
@@ -21564,7 +21577,8 @@
 
 		getDefaultProps: function getDefaultProps() {
 			return {
-				loggedIn: false
+				loggedIn: true,
+				childVisible: true
 			};
 		},
 
@@ -21578,29 +21592,24 @@
 			console.log(this.state.addPageVisible);
 		},
 
-		getPages: function getPages() {
+		searching: function searching() {
+			var that = this;
 
-			var pagesList = [{ title: hello }];
+			if (this.props.loggedIn == true) {
+				helpers.findContent().then(function (posts) {
+					console.log('searching');
+					console.log('posts are', posts);
 
-			return pagesList.map(function (page) {
-
-				return React.createElement(Page, {
-
-					title: page.title, date: page.date, body: page.text, image: page.image, key: page._id });
-			});
+					that.setState({ posts: posts });
+				});
+			}
 		},
 
-		// searching: function() {
+		pageLoadHandler: function pageLoadHandler() {
+			helpers.findContent();
 
-		// 	if (this.props.loggedIn == true) {
-		// 		helpers.findContent();
-
-		// 		console.log('searching');
-		// 		this.setState(pageList = pageList)
-		// 		console.log(pagesList);
-		// 	}
-
-		// },
+			this.setState({ posts: myposts });
+		},
 
 		//render the function
 		render: function render() {
@@ -21652,9 +21661,15 @@
 							' add a page '
 						)
 					),
-					this.state.childVisible
-					//hides component
-					? React.createElement(Login, { authHandler: this.authHandler, body: this.body }) : null,
+					React.createElement(
+						'div',
+						{ id: 'loadPages' },
+						React.createElement(
+							'a',
+							{ className: 'waves-light waves-effect btn-flat', id: 'addPageButton', name: 'action', onClick: this.pageLoadHandler },
+							' load pages '
+						)
+					),
 					React.createElement(
 						'div',
 						{ className: 'row' },
@@ -21663,7 +21678,7 @@
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						this.state.loggedIn ? React.createElement(Pages, { loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
+						this.state.loggedIn ? React.createElement(Pages, { posts: this.state.posts, loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
 					)
 				),
 				React.createElement(
@@ -26177,13 +26192,6 @@
 		displayName: 'Login',
 
 
-		handleClick: function handleClick(item, event) {
-			console.log('clicked');
-			console.log(item);
-
-			auth.login();
-		},
-
 		render: function render() {
 			return React.createElement(
 				'div',
@@ -26191,32 +26199,117 @@
 				React.createElement(
 					'h3',
 					null,
-					'Login With Google'
+					'Login'
 				),
 				React.createElement(
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'div',
-						{ className: 'input-field col s12' },
-						React.createElement('input', { id: 'email', type: 'email', className: 'validate' }),
+						'form',
+						{ id: 'login' },
 						React.createElement(
-							'label',
-							{ 'for': 'email' },
-							'Enter Your Gmail'
+							'div',
+							{ className: 'row' },
+							React.createElement(
+								'div',
+								{ className: 'input-field col s6' },
+								React.createElement(
+									'h3',
+									null,
+									' Login '
+								),
+								React.createElement(
+									'div',
+									null,
+									React.createElement(
+										'input',
+										{ id: 'username', type: 'text', className: 'validate' },
+										' '
+									),
+									React.createElement(
+										'label',
+										{ 'for': 'username' },
+										'username'
+									)
+								),
+								React.createElement(
+									'div',
+									null,
+									React.createElement(
+										'input',
+										{ id: 'password', type: 'text', className: 'validate' },
+										' '
+									),
+									React.createElement(
+										'label',
+										{ 'for': 'password' },
+										' password '
+									)
+								)
+							),
+							React.createElement(
+								'div',
+								{ className: 'input-field col s6' },
+								React.createElement(
+									'h3',
+									null,
+									' Create User '
+								),
+								React.createElement(
+									'div',
+									null,
+									React.createElement(
+										'input',
+										{ id: 'username', type: 'text', className: 'validate' },
+										' '
+									),
+									React.createElement(
+										'label',
+										{ 'for': 'username' },
+										'username'
+									)
+								),
+								React.createElement(
+									'div',
+									null,
+									React.createElement(
+										'input',
+										{ id: 'password', type: 'text', className: 'validate' },
+										' '
+									),
+									React.createElement(
+										'label',
+										{ 'for': 'password' },
+										' password '
+									)
+								),
+								React.createElement(
+									'div',
+									null,
+									React.createElement(
+										'input',
+										{ id: 'cpassword', type: 'text', className: 'validate' },
+										' '
+									),
+									React.createElement(
+										'label',
+										{ 'for': 'password' },
+										' confirm password '
+									)
+								)
+							)
+						),
+						React.createElement(
+							'button',
+							{ className: 'btn btn-flat waves-effect waves-light', type: 'submit', name: 'action' },
+							'Submit',
+							React.createElement(
+								'i',
+								{ className: 'material-icons right' },
+								' send '
+							)
 						)
 					)
-				),
-				React.createElement(
-					'button',
-					{ className: 'btn btn-flat waves-effect waves-light', type: 'submit', name: 'action' },
-					'Submit',
-					React.createElement(
-						'i',
-						{ className: 'material-icons right' },
-						' send '
-					),
-					'  '
 				)
 			);
 		}
@@ -32163,196 +32256,70 @@
 	var React = __webpack_require__(1);
 
 	//indlude Child
-	var OnePage = __webpack_require__(306);
-	//include helpers
-	var helpers = __webpack_require__(305);
-	var axios = __webpack_require__(283);
+	//
+
 
 	var Pages = React.createClass({
 		displayName: 'Pages',
 
 
-		getInitialState: function getInitialState() {
-			return {
-				posts: []
-			};
-		},
-
-		searching: function searching() {
-
-			if (this.props.loggedIn == true) {
-				//helpers.findContent();
-
-				console.log('searching');
-				// 	this.setState( {pagesList: List} );
-				// console.log(pagesList);
-			}
-		},
-
-		findContent: function findContent() {
-			//instead of name should search by user id? deleted params for username
-			// return axios.get('/findPosts')
-			// .then(function(res) {
-			// 	console.log('finding');
-			// 	console.log('helping' + res);
-
-			// 	var posts = res.dataTypes;
-			// 	return posts
-
-			// 	console.log('helpers' + List);
-			// })
-		},
-
-		componentDidMount: function componentDidMount() {
-			this.serverRequest = $.get(this.props.source, function (result) {
-				console.log('running');
-
-				//this.props.searching();
-				return axios.get('/findPosts').then(function (res) {
-					//console.log('finding');
-					console.log('helping' + res);
-
-					var posts = res.dataTypes;
-					return posts;
-
-					//console.log('helpers' + List);
-				});
-				//console.log(this)
-			});
-		},
-
-		componentWillUnmount: function componentWillUnmount() {
-			this.serverRequest.abort();
-		},
-
 		render: function render() {
+			console.log('posts in component are', this.props.posts);
 
 			if (this.props.loggedIn == true) {
 				console.log(this);
-				//this.state.searching();
-				//this.state.findContent();
 			} else {
 				console.log(false);
 			}
 
+			var pagesNodes = this.props.posts.map(function (post) {
+				return React.createElement(
+					'div',
+					{ key: post._id, className: 'post col s6' },
+					React.createElement(
+						'h3',
+						null,
+						' ',
+						post.title,
+						' '
+					),
+					React.createElement(
+						'p',
+						null,
+						' ',
+						post.text,
+						' '
+					),
+					React.createElement(
+						'p',
+						{ className: 'right' },
+						' ',
+						post.date,
+						' '
+					)
+				);
+			});
+			console.log('pages nodes are ', pagesNodes);
 			return React.createElement(
 				'div',
 				{ className: 'pagesContainer' },
 				React.createElement(
 					'div',
-					{ className: 'col s12 m6 post' },
+					{ className: 'row' },
 					React.createElement(
-						'h4',
-						{ className: 'title' },
-						'Friday September 24, 2016'
-					),
-					React.createElement(
-						'p',
-						null,
-						'Lexie\'s birthday! We had cake and ice cream and went to Disney to watch the fireworks.'
-					),
-					React.createElement('img', { src: 'http://www.zillycakes.com/wp-content/uploads/2016/04/10-Fun-And-Creative-Ways-to-Bake-Your-Own-Birthday-Cake.jpg', height: '300', width: '350' })
-				),
-				React.createElement(
-					'div',
-					{ className: 'col s12 m6 post' },
-					React.createElement(
-						'h4',
-						{ className: 'title' },
-						'To Do List '
-					),
-					React.createElement(
-						'p',
-						null,
-						'Rewatch Wonder Woman trailer for the thousandth time'
-					),
-					React.createElement(
-						'p',
-						null,
-						'Take puppy to the vet for booster shots'
-					),
-					React.createElement(
-						'p',
-						null,
-						'groceries'
-					),
-					React.createElement(
-						'p',
-						null,
-						'return shorts that Jeff doesnt like'
-					),
-					React.createElement(
-						'p',
-						null,
-						'research new phones to replace mine and Jackie'
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'col s12 m6 post' },
-					React.createElement(
-						'h4',
-						{ className: 'title' },
-						' Movies I want to Watch '
-					),
-					React.createElement(
-						'p',
-						null,
-						' Wonder Woman '
-					),
-					React.createElement(
-						'p',
-						null,
-						' Star Wars '
-					),
-					React.createElement(
-						'p',
-						null,
-						' stuff '
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'post col s12 m6' },
-					React.createElement(
-						'h1',
-						null,
-						'Jobs!'
-					),
-					this.state.posts.map(function (post) {
-						return React.createElement(
+						'div',
+						{ className: 'post col s12' },
+						React.createElement(
+							'h3',
+							null,
+							'Pages'
+						),
+						React.createElement(
 							'div',
-							{ key: post.id, className: 'post' },
-							React.createElement(
-								'h3',
-								null,
-								' ',
-								post.title,
-								' '
-							),
-							React.createElement(
-								'p',
-								null,
-								' ',
-								post.text,
-								' '
-							),
-							React.createElement(
-								'img',
-								null,
-								' ',
-								post.imgage,
-								' height="300" width="350"> '
-							),
-							React.createElement(
-								'p',
-								{ 'class': 'right' },
-								' ',
-								post.date,
-								' '
-							)
-						);
-					})
+							null,
+							pagesNodes
+						)
+					)
 				)
 			);
 		}
@@ -32394,7 +32361,7 @@
 						React.createElement(
 							'div',
 							{ className: 'input-field col s12 m6' },
-							React.createElement('textarea', { id: 'postTitle', className: 'materialize-textarea' }),
+							React.createElement('input', { id: 'postTitle', className: 'materialize-textarea validate', type: 'text' }),
 							React.createElement(
 								'label',
 								{ htmlFor: 'postTitle' },
@@ -32515,7 +32482,7 @@
 						React.createElement(
 							'div',
 							{ className: 'input-field col m6 s12' },
-							React.createElement('textarea', { id: 'imageURL', className: 'materialize-textarea' }),
+							React.createElement('input', { id: 'imageURL', className: 'materialize-textarea validate', type: 'text' }),
 							React.createElement(
 								'label',
 								{ htmlFor: 'image' },
@@ -32588,7 +32555,52 @@
 
 	'use strict';
 
-	module.exports = __webpack_require__(284);
+	var axios = __webpack_require__(284);
+
+	var helpers = {
+
+		addUser: function addUser(userObject) {
+
+			return axios.post('/userLogin', userObject).then(function (resposne) {});
+		},
+
+		addContent: function addContent(contentObj) {
+			//takes input object from React and sends to db
+			return axios.post('/user', contentObj).then(function (response) {
+				//confirms success
+				console.log('helpers ' + response);
+			});
+		},
+
+		//finds user name
+		queryUser: function queryUser(userName) {
+			//searches for a single user
+			return axios.get('/findUser', name).then(function (response) {
+				console.log('' + name);
+			});
+			// // this.findOne({ 'name': 'testUser'}, function(err, person) {
+
+			// // 	if(err) return handleError(err);
+			// // 	//console.log('%s', this.name);
+			// }) 
+		},
+
+		//finds user content
+		findContent: function findContent() {
+			//instead of name should search by user id? deleted params for username
+			console.log('find me');
+			return axios.get('/findPosts').then(function (res) {
+				console.log('res is', res);
+
+				var posts = res.data;
+				//console.log('helping' + res);
+				return posts;
+			});
+		}
+
+	};
+
+	module.exports = helpers;
 
 /***/ },
 /* 284 */
@@ -32596,9 +32608,17 @@
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
-	var bind = __webpack_require__(286);
-	var Axios = __webpack_require__(287);
+	module.exports = __webpack_require__(285);
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var utils = __webpack_require__(286);
+	var bind = __webpack_require__(287);
+	var Axios = __webpack_require__(288);
 
 	/**
 	 * Create an instance of Axios
@@ -32634,7 +32654,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(304);
+	axios.spread = __webpack_require__(305);
 
 	module.exports = axios;
 
@@ -32642,14 +32662,14 @@
 	module.exports.default = axios;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var bind = __webpack_require__(286);
+	var bind = __webpack_require__(287);
 
 	/*global toString:true*/
 
@@ -32944,7 +32964,7 @@
 	};
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32960,17 +32980,17 @@
 	};
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(288);
-	var utils = __webpack_require__(285);
-	var InterceptorManager = __webpack_require__(290);
-	var dispatchRequest = __webpack_require__(291);
-	var isAbsoluteURL = __webpack_require__(302);
-	var combineURLs = __webpack_require__(303);
+	var defaults = __webpack_require__(289);
+	var utils = __webpack_require__(286);
+	var InterceptorManager = __webpack_require__(291);
+	var dispatchRequest = __webpack_require__(292);
+	var isAbsoluteURL = __webpack_require__(303);
+	var combineURLs = __webpack_require__(304);
 
 	/**
 	 * Create a new instance of Axios
@@ -33050,13 +33070,13 @@
 	module.exports = Axios;
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
-	var normalizeHeaderName = __webpack_require__(289);
+	var utils = __webpack_require__(286);
+	var normalizeHeaderName = __webpack_require__(290);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -33122,12 +33142,12 @@
 	};
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -33139,12 +33159,12 @@
 	};
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -33196,13 +33216,13 @@
 	module.exports = InterceptorManager;
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(285);
-	var transformData = __webpack_require__(292);
+	var utils = __webpack_require__(286);
+	var transformData = __webpack_require__(293);
 
 	/**
 	 * Dispatch a request to the server using whichever adapter
@@ -33232,10 +33252,10 @@
 	    adapter = config.adapter;
 	  } else if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(293);
+	    adapter = __webpack_require__(294);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(293);
+	    adapter = __webpack_require__(294);
 	  }
 
 	  return Promise.resolve(config)
@@ -33257,12 +33277,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	/**
 	 * Transform the data for a request or a response
@@ -33282,18 +33302,18 @@
 	};
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(285);
-	var settle = __webpack_require__(294);
-	var buildURL = __webpack_require__(297);
-	var parseHeaders = __webpack_require__(298);
-	var isURLSameOrigin = __webpack_require__(299);
-	var createError = __webpack_require__(295);
-	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(300);
+	var utils = __webpack_require__(286);
+	var settle = __webpack_require__(295);
+	var buildURL = __webpack_require__(298);
+	var parseHeaders = __webpack_require__(299);
+	var isURLSameOrigin = __webpack_require__(300);
+	var createError = __webpack_require__(296);
+	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(301);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -33384,7 +33404,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(301);
+	      var cookies = __webpack_require__(302);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
@@ -33444,12 +33464,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(295);
+	var createError = __webpack_require__(296);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -33469,12 +33489,12 @@
 	};
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(296);
+	var enhanceError = __webpack_require__(297);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -33491,7 +33511,7 @@
 	};
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33516,12 +33536,12 @@
 	};
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	function encode(val) {
 	  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -33582,12 +33602,12 @@
 	};
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	/**
 	 * Parse headers into an object
@@ -33626,12 +33646,12 @@
 	};
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33694,7 +33714,7 @@
 	}();
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33734,12 +33754,12 @@
 	module.exports = btoa;
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(285);
+	var utils = __webpack_require__(286);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33792,7 +33812,7 @@
 	}();
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33813,7 +33833,7 @@
 	};
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33831,7 +33851,7 @@
 	};
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33862,89 +33882,6 @@
 	    return callback.apply(null, arr);
 	  };
 	};
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var axios = __webpack_require__(283);
-
-	var helpers = {
-
-		addContent: function addContent(contentObj) {
-			//takes input object from React and sends to db
-			return axios.post('/user', contentObj).then(function (response) {
-				//confirms success
-				console.log('helpers ' + response);
-			});
-		},
-
-		//finds user name
-		queryUser: function queryUser(userName) {
-			//searches for a single user
-			return axios.get('/findUser', name).then(function (response) {
-				console.log('' + name);
-			});
-			// // this.findOne({ 'name': 'testUser'}, function(err, person) {
-
-			// // 	if(err) return handleError(err);
-			// // 	//console.log('%s', this.name);
-			// }) 
-		},
-
-		//finds user content
-		findContent: function findContent() {
-			//instead of name should search by user id? deleted params for username
-			return axios.get('/findPosts').then(function (res) {
-				console.log(res);
-				//console.log('helping' + res);
-
-				var posts = res.dataTypes;
-				return posts;
-
-				//console.log('helpers' + posts);
-			});
-		}
-
-	};
-
-	module.exports = helpers;
-
-/***/ },
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	var OnePage = React.createClass({
-		displayName: "OnePage",
-		render: function render() {
-
-			return React.createElement(
-				"div",
-				{ className: "post" },
-				React.createElement(
-					"h4",
-					null,
-					" ",
-					this.props.title
-				),
-				React.createElement(
-					"p",
-					null,
-					" ",
-					this.props.body,
-					" "
-				)
-			);
-		}
-	});
-
-	module.exports = OnePage;
 
 /***/ }
 /******/ ]);

@@ -32,7 +32,8 @@ header {
   font-family: "Permanent Marker", cursive; }
 
 .post {
-  background-image: url("./images/gridme.png"); }
+  background-image: url("./images/gridme.png");
+  margin: 10px; }
 
 body {
   line-height: 32px;
