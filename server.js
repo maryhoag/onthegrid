@@ -7,16 +7,16 @@ var express = require('express');
 var bodyParser = require("body-parser");
 
 var logger = require('morgan');
-//var mongojs = require("mongojs");
+
+//mongoose to handle mongodb
 var mongoose = require('mongoose');
+//for routing in reacat
 var axios = require('axios');
 var helpers =require('./app/utils/helpers.js');
 
 //creating an instance of express
 var app = express();
 var PORT = process.env.PORT || 3000; //assigning the port or env var
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,22 +31,21 @@ app.post('/post', api.post);
 app.get('/post/:title.:format?', api.show);
 app.get('/post', api.list);
 
-
-
 // Main Route. This route will redirect to our rendered React application
 app.get('/', function(req, res){
   res.sendFile('./public/index.html');
 });
 
-
 //create db connection
 
 //database connected to TEST
 mongoose.connect('mongodb://localhost/test');
+mongoose.Promise = global.Promise;
 //heroku uri
 //MONGODB_URI: mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q
 // var mongooseURI =  'mongodb://heroku_4xh1356q:b39vpthfjhkfep6omg04002pu1@ds019876.mlab.com:19876/heroku_4xh1356q';
 // mongoose.connect(mongooseURI);
+mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;
 
@@ -104,32 +103,57 @@ db.once('open', function callback() {
 
 });
 
-
-
-
 var User = require('./models/User');
 var Post = require('./models/Post');
 
 //need axios
 app.post("/user", function(req,res,next){
-	var userInfo = req.body;
-	console.log('server' + req.body);
+	var userInfo = req.body
+	console.log('server' + req.body.text);
 
-	res.send(req.body);
-	//res.render('./public/');
-
-	//var newUser = new User(userInfo);
-	//console.log('there is a new user' + userInfo);
 	var newPage = new Post(userInfo);
 
-	newPage.save(function (err) {
+	newPage.save(function (err, savedObj) {
 	  console.error(String(err)) 
 	
 	  console.log("server log");
+	  res.send(savedObj);
 
 	 });
 
 });
+
+app.get('/findUser', function(req, res, next) {
+	var postSearch = req.body;
+	var userName = postSearch.userName;
+	console.log('server findUser' + req.body);
+
+	//res.send(req.body)
+});
+
+app.get('/findPosts', function(req, res, next) {
+	var postBundle = req.body;
+	console.log(req.body);
+	console.log('i ran too');
+
+	Post.find() //users: userid
+	.limit(10)
+	.sort({ date: -1 })
+	.exec(function(err, posts) {
+			if (err) { return console.error(err) }
+
+				res.send(posts)
+		});
+ //  		//select({ name: 1, occupation: 1 })
+ //  		.then(
+		  	//console.log(res.body);
+		  	//res.send('finding posts');
+
+    //console.log(res.body);
+		 
+});
+
+
 
 // 	mongoose.connection.db.close(err) {
 // 		if(err) throw err;
@@ -199,5 +223,6 @@ app.post("/user", function(req,res,next){
 
 
 app.listen(PORT, function() {
+	//confirms app is listening and server is running
 	console.log("listening on port %d", PORT);
 });
