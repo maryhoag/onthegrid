@@ -13,7 +13,6 @@ var AddPage = React.createClass({
 		}
 
 			return (
-				//move this to main and try again
 				
 				<div className="row adding">
 
@@ -21,7 +20,7 @@ var AddPage = React.createClass({
 				    	{/* input for post title */}
 				  		<div className="row">
 							<div className="input-field col s12 m6">
-								<textarea id="postTitle" className="materialize-textarea"></textarea>
+								<input id="postTitle" className="materialize-textarea validate"type="text"></input>
 								<label htmlFor="postTitle">Title</label>
 							</div>
 					
@@ -30,11 +29,9 @@ var AddPage = React.createClass({
 						      	<ul>
 						      		<li><a href="#">Border Color</a>
 						      			<ul id="borderColor">
-						      				<li><a id="blue" className="btn waves-effect waves-light" value="blue" onClick={this.props.blueButton} > blue </a></li>
+						      				<li><a href='#' className="colorChoice" value="blue" onClick={this.props._onBorderSelect} > blue </a></li>
 						      				<li><a href="#" value="red" onClick={this.props._onBorderSelect} >red</a></li>
 						      				<li><a href="#" value="green" onClick={this.props._onBorderSelect} >green</a></li>
-						      			{/* i think this can be replaced with {borderColor} and no element tag or punctuation borderColor.map */}
-						      			borderColor.map() 
 						      			</ul>
 						      		</li>
 						      		<li><a href="#">Font</a>
@@ -59,7 +56,7 @@ var AddPage = React.createClass({
 				  		{/* input for an image */}
 				      <div className="row">
 				      	<div className="input-field col m6 s12">
-				      		<textarea id="imageURL" className="materialize-textarea"></textarea>
+				      		<input id="imageURL" className="materialize-textarea validate" type="text"></input>
 				      		<label htmlFor="image">image URL </label>
 				      	</div>
 				      </div>
