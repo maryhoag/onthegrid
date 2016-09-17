@@ -32,13 +32,13 @@ var helpers = {
 		//instead of name should search by user id? deleted params for username
 		return axios.get('/findPosts')
 		.then(function(res) {
-			console.log('finding');
-			console.log('helping' + res);
+			console.log(res);
+			//console.log('helping' + res);
 
-			var List = res.dataTypes;
-			return List
+			var posts = res.dataTypes;
+			return posts
 
-			console.log('helpers' + List);
+			//console.log('helpers' + posts);
 		})
 	},
 

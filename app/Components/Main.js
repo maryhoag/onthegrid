@@ -72,6 +72,8 @@ var Main = React.createClass({
 		var contentObj = {text: mytext, title: mytitle, image: myimg, date: mydate};
 		//and sends it to helpers to be stored in db
 		helpers.addContent(contentObj);
+
+		
 	},
 
 	_onBorderSelect: function() {

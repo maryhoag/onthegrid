@@ -4,32 +4,62 @@ var React = require('react');
 //indlude Child
 var OnePage= require('./OnePage');
 //include helpers
-var helpers = require('../../utils/helpers.js')
-
+var helpers = require('../../utils/helpers.js');
+var axios = require('axios');
 
 import { Button, Card, Row, Col } from 'react-materialize';
 
 var Pages = React.createClass({
 
+	getInitialState: function() {
+		return {
+			posts: []
+		}
+	},
+
 	searching: function() {
 
 		if (this.props.loggedIn == true) {
-			helpers.findContent();
+			//helpers.findContent();
 
 			console.log('searching');
-				this.setState( {pagesList: List} );
-			console.log(pagesList);
+			// 	this.setState( {pagesList: List} );
+			// console.log(pagesList);
 		}
 
+	},
+
+	findContent: function() {
+		//instead of name should search by user id? deleted params for username
+		// return axios.get('/findPosts')
+		// .then(function(res) {
+		// 	console.log('finding');
+		// 	console.log('helping' + res);
+
+		// 	var posts = res.dataTypes;
+		// 	return posts
+
+		// 	console.log('helpers' + List);
+		// })
 	},
 
 	componentDidMount: function() {
 	    this.serverRequest = $.get(this.props.source, function (result) {
 	    	console.log('running');
 
-	    	//this.state.searching();
-	    	console.log(this)
-	    })     
+	    	//this.props.searching();
+	    	return axios.get('/findPosts')
+			.then(function(res) {
+				//console.log('finding');
+				console.log('helping' + res);
+
+				var posts = res.dataTypes;
+				return posts
+
+				//console.log('helpers' + List);
+			})
+		    	//console.log(this)
+		    })     
 	 },
 
 	 componentWillUnmount: function() {
@@ -40,7 +70,10 @@ var Pages = React.createClass({
 
 		if(this.props.loggedIn == true) {
 			console.log(this);
-			this.props.searching();
+			//this.state.searching();
+			//this.state.findContent();
+		} else {
+			console.log(false);
 		}
 
 		return (
@@ -73,12 +106,18 @@ var Pages = React.createClass({
 		        </div>
 
 			    <div className="post col s12 m6">
-
-			    	<h3> Pages </h3>
-
-			  	 
-			   		
-				</div>
+		        <h1>Jobs!</h1>
+		        {this.state.posts.map(function(post) {
+		          return (
+		            <div key={post.id} className="post">
+		              <h3> {post.title} </h3>
+		              <p> {post.text} </p>
+		              <img> {post.imgage} height="300" width="350"> </img>
+		              <p class="right"> {post.date} </p>
+		            </div>
+		          );
+		        })}
+		      </div>
 
 		    </div>    
 	)}

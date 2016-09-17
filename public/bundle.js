@@ -32166,28 +32166,58 @@
 	var OnePage = __webpack_require__(306);
 	//include helpers
 	var helpers = __webpack_require__(305);
+	var axios = __webpack_require__(283);
 
 	var Pages = React.createClass({
 		displayName: 'Pages',
 
 
+		getInitialState: function getInitialState() {
+			return {
+				posts: []
+			};
+		},
+
 		searching: function searching() {
 
 			if (this.props.loggedIn == true) {
-				helpers.findContent();
+				//helpers.findContent();
 
 				console.log('searching');
-				this.setState({ pagesList: List });
-				console.log(pagesList);
+				// 	this.setState( {pagesList: List} );
+				// console.log(pagesList);
 			}
+		},
+
+		findContent: function findContent() {
+			//instead of name should search by user id? deleted params for username
+			// return axios.get('/findPosts')
+			// .then(function(res) {
+			// 	console.log('finding');
+			// 	console.log('helping' + res);
+
+			// 	var posts = res.dataTypes;
+			// 	return posts
+
+			// 	console.log('helpers' + List);
+			// })
 		},
 
 		componentDidMount: function componentDidMount() {
 			this.serverRequest = $.get(this.props.source, function (result) {
 				console.log('running');
 
-				//this.state.searching();
-				console.log(this);
+				//this.props.searching();
+				return axios.get('/findPosts').then(function (res) {
+					//console.log('finding');
+					console.log('helping' + res);
+
+					var posts = res.dataTypes;
+					return posts;
+
+					//console.log('helpers' + List);
+				});
+				//console.log(this)
 			});
 		},
 
@@ -32199,7 +32229,10 @@
 
 			if (this.props.loggedIn == true) {
 				console.log(this);
-				this.props.searching();
+				//this.state.searching();
+				//this.state.findContent();
+			} else {
+				console.log(false);
 			}
 
 			return React.createElement(
@@ -32282,10 +32315,44 @@
 					'div',
 					{ className: 'post col s12 m6' },
 					React.createElement(
-						'h3',
+						'h1',
 						null,
-						' Pages '
-					)
+						'Jobs!'
+					),
+					this.state.posts.map(function (post) {
+						return React.createElement(
+							'div',
+							{ key: post.id, className: 'post' },
+							React.createElement(
+								'h3',
+								null,
+								' ',
+								post.title,
+								' '
+							),
+							React.createElement(
+								'p',
+								null,
+								' ',
+								post.text,
+								' '
+							),
+							React.createElement(
+								'img',
+								null,
+								' ',
+								post.imgage,
+								' height="300" width="350"> '
+							),
+							React.createElement(
+								'p',
+								{ 'class': 'right' },
+								' ',
+								post.date,
+								' '
+							)
+						);
+					})
 				)
 			);
 		}
@@ -33831,13 +33898,13 @@
 		findContent: function findContent() {
 			//instead of name should search by user id? deleted params for username
 			return axios.get('/findPosts').then(function (res) {
-				console.log('finding');
-				console.log('helping' + res);
+				console.log(res);
+				//console.log('helping' + res);
 
-				var List = res.dataTypes;
-				return List;
+				var posts = res.dataTypes;
+				return posts;
 
-				console.log('helpers' + List);
+				//console.log('helpers' + posts);
 			});
 		}
 
