@@ -113,10 +113,15 @@ li > a:only-child:after {
   content: ''; }
 
 .adding {
-  border: dotted;
   padding: 5px;
-  border-color: #787760;
   background-image: url("./images/gridme.png"); }
 
 #submit {
   background-color: #A60000; }
+
+#addPageModal {
+  font: "Permanent Marker", cursive; }
+
+#buttonCentered {
+  text-align: center;
+  font: "Permanent Marker", cursive; }

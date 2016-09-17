@@ -106,13 +106,22 @@ li > a:only-child:after { content: ''; }
 
 
 .adding {
-	border: dotted;
+	
 	padding: 5px;
-	border-color: $header-background;
 	background-image: url('./images/gridme.png') /* subtlepatterns.com*/;
 }
 
 #submit {
 	background-color: $header-text;
 
+}
+
+#addPageModal {
+	font: $sharpie;
+	
+}
+
+#buttonCentered {
+	text-align: center;
+	font: $sharpie;
 }

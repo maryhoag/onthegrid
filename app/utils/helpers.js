@@ -4,8 +4,10 @@ var helpers = {
 
 
 	addContent: function(contentObj) {
+		//takes input object from React and sends to db
 		return axios.post('/user', contentObj)
 			.then(function(response) {
+				//confirms success
 				console.log('helpers ' + response);
 				
 			})
@@ -26,32 +28,33 @@ var helpers = {
 	},
 
 	//finds user content
-	findContent: function(userName) {
-		//instead of name should search by user id?
-		return axios.get('/findPosts', name)
-		.then(function(response) {
-			console.log('')
-		})
-		this.find(function(err, users) {
-			if(err) return console.log(err);
+	findContent: function() {
+		//instead of name should search by user id? deleted params for username
+		return axios.get('/findPosts')
+		.then(function(res) {
+			console.log('finding');
+			console.log('helping' + res);
 
-			console.log(results);
+			var List = res.dataTypes;
+			return List
+
+			console.log('helpers' + List);
 		})
 	},
 
 	//page template
-	createPage: function(font, borderColor, title, text, image) {
+	// createPage: function(font, borderColor, title, text, image) {
 
-		//need to do this via parent function with .map()
+	// 	//need to do this via parent function with .map()
 
-		var myPage = '<div className="col s12 m6 post">';
-		myPage += '<h4 className="title"> {title} </h4>';
-		myPage += '<p> {text} </p>';
-		myPage += '<img src={image} height="300" width="350"></img>';
-		myPage += '<p className="right"> {date} </p>';
-		myPage += '</div>';
+	// 	var myPage = '<div className="col s12 m6 post">';
+	// 	myPage += '<h4 className="title"> {title} </h4>';
+	// 	myPage += '<p> {text} </p>';
+	// 	myPage += '<img src={image} height="300" width="350"></img>';
+	// 	myPage += '<p className="right"> {date} </p>';
+	// 	myPage += '</div>';
 
-	}
+	// }
 
 };
 
