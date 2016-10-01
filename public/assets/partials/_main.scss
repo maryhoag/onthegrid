@@ -5,12 +5,16 @@
   }
 
 body {
-  background-color: $background;
+  
+  background-image: url('./images/gridme.png') /* subtlepatterns.com*/;
+	margin: 10px;
+  
 }
 
 main {
     flex: 1 0 auto;
     color: $text-color;
+    
     
     font-family: $default-font;
   }

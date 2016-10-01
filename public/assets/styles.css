@@ -14,7 +14,8 @@
   flex-direction: column; }
 
 body {
-  background-color: #ECEAE1; }
+  background-image: url("./images/gridme.png");
+  margin: 10px; }
 
 main {
   flex: 1 0 auto;
@@ -32,8 +33,7 @@ header {
   font-family: "Permanent Marker", cursive; }
 
 .post {
-  background-image: url("./images/gridme.png");
-  margin: 10px; }
+  background-color: #ECEAE1; }
 
 .title {
   color: #A60000;
@@ -49,6 +49,10 @@ header {
 body {
   line-height: 32px;
   word-wrap: break-word !important; }
+
+#page-wrap .adding {
+  background-color: #ECEAE1;
+  padding: 5px; }
 
 h1 {
   font-size: 60px;
@@ -123,10 +127,6 @@ li > a:after {
 
 li > a:only-child:after {
   content: ''; }
-
-.adding {
-  padding: 5px;
-  background-image: url("./images/gridme.png"); }
 
 #submit {
   background-color: #A60000; }
