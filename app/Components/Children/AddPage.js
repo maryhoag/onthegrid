@@ -16,7 +16,7 @@ var AddPage = React.createClass({
 				
 				<div className="row adding">
 
-				    <form>
+				    <form id="bg-color">
 				    	{/* input for post title */}
 				  		<div className="row">
 							<div className="input-field col s12 m6">
