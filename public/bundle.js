@@ -21475,11 +21475,9 @@
 
 	//include children
 	var Login = __webpack_require__(216);
-
-	var Pages = __webpack_require__(280);
-	var AddPage1 = __webpack_require__(281);
-	var AddPage2 = __webpack_require__(282);
-	var Story = __webpack_require__(283);
+	var AddPage1 = __webpack_require__(280);
+	var AddPage2 = __webpack_require__(281);
+	var Pages1 = __webpack_require__(282);
 
 	var helpers = __webpack_require__(284);
 
@@ -21683,7 +21681,7 @@
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						this.state.loggedIn ? React.createElement(Pages, { posts: this.state.posts, loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
+						this.state.loggedIn ? React.createElement(Pages1, { posts: this.state.posts, loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
 					)
 				),
 				React.createElement(
@@ -32257,97 +32255,9 @@
 
 	var _reactMaterialize = __webpack_require__(173);
 
-	//include react
 	var React = __webpack_require__(1);
 
-	//indlude Child
-	//
-
-
-	var Pages = React.createClass({
-		displayName: 'Pages',
-
-
-		render: function render() {
-			console.log('posts in component are', this.props.posts);
-
-			if (this.props.loggedIn == true) {
-				console.log(this);
-			} else {
-				console.log(false);
-			}
-
-			var pagesNodes = this.props.posts.map(function (post) {
-				console.log(post);
-				return React.createElement(
-					'div',
-					{ key: post._id, className: 'post col s12' },
-					React.createElement(
-						'p',
-						{ className: 'left icons' },
-						React.createElement(
-							'i',
-							{ className: 'material-icons right' },
-							'label_outline'
-						)
-					),
-					React.createElement(
-						'h3',
-						{ className: 'title' },
-						' ',
-						post.title,
-						' '
-					),
-					React.createElement(
-						'p',
-						{ className: 'text' },
-						' ',
-						post.text,
-						' '
-					),
-					React.createElement('img', { src: post.image, height: '300', width: '350' })
-				);
-			});
-			console.log('pages nodes are ', pagesNodes);
-			return React.createElement(
-				'div',
-				{ className: 'pagesContainer' },
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'div',
-						{ className: '#postGroup col s12' },
-						React.createElement(
-							'h3',
-							null,
-							'Pages'
-						),
-						React.createElement(
-							'div',
-							null,
-							pagesNodes
-						)
-					)
-				)
-			);
-		}
-
-	});
-
-	module.exports = Pages;
-
-/***/ },
-/* 281 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _reactMaterialize = __webpack_require__(173);
-
-	var React = __webpack_require__(1);
-
-	var AddPage2 = __webpack_require__(282);
+	var AddPage2 = __webpack_require__(281);
 
 	var AddPage1 = React.createClass({
 	    displayName: 'AddPage1',
@@ -32385,7 +32295,7 @@
 	module.exports = AddPage1;
 
 /***/ },
-/* 282 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32544,45 +32454,115 @@
 	module.exports = AddPage2;
 
 /***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _reactMaterialize = __webpack_require__(173);
+
+	var React = __webpack_require__(1);
+
+	var Pages2 = __webpack_require__(283);
+
+	var Pages1 = React.createClass({
+	    displayName: 'Pages1',
+
+
+	    render: function render() {
+
+	        return React.createElement(
+	            'div',
+	            { className: 'pagesContainer' },
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: '#postGroup col s12' },
+	                    React.createElement(
+	                        'h3',
+	                        null,
+	                        'Pages'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        null,
+	                        React.createElement(Pages2, { addHandler: this.addHandler, options: this.props.options, defaultOption: this.props.defaultOption, _onFontSelect: this.props._onFontSelect, _onBorderSelect: this.props._onBorderSelect, font: this.props.font, borderColor: this.props.borderColor, fontDefault: this.props.defaultFontOption, defaultBorderOption: this.props.defaultBorderOption, blueButton: this.props.blueButton, contentObj: this.props.contentObj, addPageModal: this.props.addPageModal, addPageVisible: this.props.addPageVisible, getPages: this.props.getPages, posts: this.props.posts, loggedIn: this.props.loggedIn, pagesList: this.props.pagesList, searching: this.props.searaching })
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Pages1;
+
+/***/ },
 /* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var _reactMaterialize = __webpack_require__(173);
 
 	var React = __webpack_require__(1);
 
-	var Story = function (_React$Component) {
-		_inherits(Story, _React$Component);
+	var Pages2 = React.createClass({
+					displayName: 'Pages2',
 
-		function Story() {
-			_classCallCheck(this, Story);
 
-			return _possibleConstructorReturn(this, (Story.__proto__ || Object.getPrototypeOf(Story)).apply(this, arguments));
-		}
+					render: function render() {
+									console.log('posts in component are', this.props.posts);
 
-		_createClass(Story, [{
-			key: 'render',
-			value: function render() {
-				return React.createElement(
-					'p',
-					null,
-					' hiya '
-				);
-			}
-		}]);
+									if (this.props.loggedIn == true) {
+													console.log(this);
+									} else {
+													console.log(false);
+									}
 
-		return Story;
-	}(React.Component);
+									var pagesNodes = this.props.posts.map(function (post) {
+													console.log(post);
+													return React.createElement(
+																	'div',
+																	{ key: post._id, className: 'post col s12' },
+																	React.createElement(
+																					'p',
+																					{ className: 'left icons' },
+																					React.createElement(
+																									'i',
+																									{ className: 'material-icons right' },
+																									'label_outline'
+																					)
+																	),
+																	React.createElement(
+																					'h3',
+																					{ className: 'title' },
+																					' ',
+																					post.title,
+																					' '
+																	),
+																	React.createElement(
+																					'p',
+																					{ className: 'text' },
+																					' ',
+																					post.text,
+																					' '
+																	),
+																	React.createElement('img', { src: post.image, height: '300', width: '350' })
+													);
+									});
+									//console.log('pages nodes are ',pagesNodes)
 
-	module.exports = Story;
+									return React.createElement(
+													'div',
+													null,
+													pagesNodes
+									);
+					}
+	});
+
+	module.exports = Pages2;
 
 /***/ },
 /* 284 */

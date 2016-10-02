@@ -6,11 +6,9 @@ import { Button, Card, Row, Col } from 'react-materialize';
 
 //include children
 var Login = require('./Children/Login');
-
-var Pages = require('./Children/Pages');
 var AddPage1 = require('./Children/AddPage1');
 var AddPage2 = require('./Children/addPage2');
-var Story = require('./Children/Story');
+var Pages1 = require('./Children/Pages1');
 
 var helpers = require('../utils/helpers.js');
 
@@ -195,7 +193,7 @@ var Main = React.createClass({
 
 					{this.state.loggedIn
 
-							? <Pages posts={this.state.posts} loggedIn={this.state.loggedIn} pagesList={this.state.pagesList} searching={this.state.searaching} />
+							? <Pages1 posts={this.state.posts} loggedIn={this.state.loggedIn} pagesList={this.state.pagesList} searching={this.state.searaching} />
 
 							:null
 
