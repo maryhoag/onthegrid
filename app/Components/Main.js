@@ -8,7 +8,8 @@ import { Button, Card, Row, Col } from 'react-materialize';
 var Login = require('./Children/Login');
 
 var Pages = require('./Children/Pages');
-var AddPage = require('./Children/AddPage');
+var AddPage1 = require('./Children/AddPage1');
+var AddPage2 = require('./Children/addPage2');
 var Story = require('./Children/Story');
 
 var helpers = require('../utils/helpers.js');
@@ -175,7 +176,7 @@ var Main = React.createClass({
 				<main className="container">
 					<div id="buttonCentered">
 						<a className="waves-light waves-effect btn-flat" id="addPageButton" name="action" onClick={this._addPageModal} > add a page </a>
-												<a className="waves-light waves-effect btn-flat left disabled" id="morePagesButton" name="action" onClick={this.pageLoadHandler} > load more pages </a>
+                        <a className="waves-light waves-effect btn-flat left disabled" id="morePagesButton" name="action" onClick={this.pageLoadHandler} > load more pages </a>
 
 					</div>
 					
@@ -183,7 +184,7 @@ var Main = React.createClass({
 						<div className="row">
 						{ this.state.addPageVisible
 
-							? <AddPage addHandler={this.addHandler} options={this.state.options} defaultOption={this.state.defaultOption} _onFontSelect={this.state._onFontSelect} _onBorderSelect={this.state._onBorderSelect} font={this.state.font} borderColor={this.state.borderColor} fontDefault={this.state.defaultFontOption} defaultBorderOption={this.state.defaultBorderOption} blueButton={this.state.blueButton}  contentObj={this.state.contentObj} addPageModal={this.state.addPageModal} addPageVisible={this.state.addPageVisible} getPages={this.state.getPages} />
+							? <AddPage1 addHandler={this.addHandler} options={this.state.options} defaultOption={this.state.defaultOption} _onFontSelect={this.state._onFontSelect} _onBorderSelect={this.state._onBorderSelect} font={this.state.font} borderColor={this.state.borderColor} fontDefault={this.state.defaultFontOption} defaultBorderOption={this.state.defaultBorderOption} blueButton={this.state.blueButton}  contentObj={this.state.contentObj} addPageModal={this.state.addPageModal} addPageVisible={this.state.addPageVisible} getPages={this.state.getPages} />
 
 							:null
 						}
