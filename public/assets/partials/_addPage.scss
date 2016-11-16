@@ -10,6 +10,7 @@ body {
 #page-wrap .adding {
     background-color: $background;
     padding: 5px;
+    
 }
 
 h1 {
@@ -28,7 +29,9 @@ h3 a {
 	
 }
 
-a {
+#page-wrap label {
+    
+    color: $text-color;
 	
 }
 

@@ -21478,9 +21478,9 @@
 
 	var Pages = __webpack_require__(280);
 	var AddPage = __webpack_require__(281);
-	var Story = __webpack_require__(282);
+	var Story = __webpack_require__(284);
 
-	var helpers = __webpack_require__(283);
+	var helpers = __webpack_require__(285);
 
 	//main component
 	var Main = React.createClass({
@@ -32346,6 +32346,10 @@
 
 	var React = __webpack_require__(1);
 
+	var Fonts = __webpack_require__(282);
+	var Tabs = __webpack_require__(283);
+
+
 	var AddPage = React.createClass({
 		displayName: 'AddPage',
 
@@ -32362,7 +32366,7 @@
 				{ className: 'row adding' },
 				React.createElement(
 					'form',
-					null,
+					{ id: 'bg-color' },
 					React.createElement(
 						'div',
 						{ className: 'row' },
@@ -32385,86 +32389,8 @@
 								React.createElement(
 									'ul',
 									null,
-									React.createElement(
-										'li',
-										null,
-										React.createElement(
-											'a',
-											{ href: '#' },
-											'Border Color'
-										),
-										React.createElement(
-											'ul',
-											{ id: 'borderColor' },
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#', className: 'colorChoice', value: 'blue', onClick: this.props._onBorderSelect },
-													' blue '
-												)
-											),
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#', value: 'red', onClick: this.props._onBorderSelect },
-													'red'
-												)
-											),
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#', value: 'green', onClick: this.props._onBorderSelect },
-													'green'
-												)
-											)
-										)
-									),
-									React.createElement(
-										'li',
-										null,
-										React.createElement(
-											'a',
-											{ href: '#' },
-											'Font'
-										),
-										React.createElement(
-											'ul',
-											null,
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#' },
-													'sharpie'
-												)
-											),
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#' },
-													'script'
-												)
-											),
-											React.createElement(
-												'li',
-												null,
-												React.createElement(
-													'a',
-													{ href: '#' },
-													'prompt'
-												)
-											)
-										)
-									)
+									React.createElement(Tabs, { _onBorderSelect: this.props._onBorderSelect, borderColor: this.props.borderColor, defaultBorderOption: this.props.defaultBorderOption, blueButton: this.props.blueButton }),
+									React.createElement(Fonts, { _onFontSelect: this.props._onFontSelect, font: this.props.font, fontDefault: this.props.defaultFontOption })
 								)
 							)
 						)
@@ -32519,6 +32445,121 @@
 /* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Fonts = React.createClass({
+	    displayName: "Fonts",
+
+
+	    render: function render() {
+	        return React.createElement(
+	            "li",
+	            null,
+	            React.createElement(
+	                "a",
+	                { href: "#" },
+	                "Font"
+	            ),
+	            React.createElement(
+	                "ul",
+	                null,
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        "sharpie"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        "script"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        "prompt"
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Fonts;
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Tabs = React.createClass({
+	    displayName: "Tabs",
+
+	    render: function render() {
+	        return React.createElement(
+	            "li",
+	            null,
+	            React.createElement(
+	                "a",
+	                { href: "#" },
+	                "Border Color"
+	            ),
+	            React.createElement(
+	                "ul",
+	                { id: "borderColor" },
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#", className: "colorChoice", value: "blue", onClick: this.props._onBorderSelect },
+	                        " blue "
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#", value: "red", onClick: this.props._onBorderSelect },
+	                        "red"
+	                    )
+	                ),
+	                React.createElement(
+	                    "li",
+	                    null,
+	                    React.createElement(
+	                        "a",
+	                        { href: "#", value: "green", onClick: this.props._onBorderSelect },
+	                        "green"
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Tabs;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32557,12 +32598,12 @@
 	module.exports = Story;
 
 /***/ },
-/* 283 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var axios = __webpack_require__(284);
+	var axios = __webpack_require__(286);
 
 	var helpers = {
 
@@ -32610,22 +32651,22 @@
 	module.exports = helpers;
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(285);
+	module.exports = __webpack_require__(287);
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
-	var bind = __webpack_require__(287);
-	var Axios = __webpack_require__(288);
+	var utils = __webpack_require__(288);
+	var bind = __webpack_require__(289);
+	var Axios = __webpack_require__(290);
 
 	/**
 	 * Create an instance of Axios
@@ -32661,7 +32702,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(305);
+	axios.spread = __webpack_require__(307);
 
 	module.exports = axios;
 
@@ -32669,14 +32710,14 @@
 	module.exports.default = axios;
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var bind = __webpack_require__(287);
+	var bind = __webpack_require__(289);
 
 	/*global toString:true*/
 
@@ -32971,7 +33012,7 @@
 	};
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32987,17 +33028,17 @@
 	};
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(289);
-	var utils = __webpack_require__(286);
-	var InterceptorManager = __webpack_require__(291);
-	var dispatchRequest = __webpack_require__(292);
-	var isAbsoluteURL = __webpack_require__(303);
-	var combineURLs = __webpack_require__(304);
+	var defaults = __webpack_require__(291);
+	var utils = __webpack_require__(288);
+	var InterceptorManager = __webpack_require__(293);
+	var dispatchRequest = __webpack_require__(294);
+	var isAbsoluteURL = __webpack_require__(305);
+	var combineURLs = __webpack_require__(306);
 
 	/**
 	 * Create a new instance of Axios
@@ -33077,13 +33118,13 @@
 	module.exports = Axios;
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
-	var normalizeHeaderName = __webpack_require__(290);
+	var utils = __webpack_require__(288);
+	var normalizeHeaderName = __webpack_require__(292);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -33149,12 +33190,12 @@
 	};
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -33166,12 +33207,12 @@
 	};
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -33223,13 +33264,13 @@
 	module.exports = InterceptorManager;
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(286);
-	var transformData = __webpack_require__(293);
+	var utils = __webpack_require__(288);
+	var transformData = __webpack_require__(295);
 
 	/**
 	 * Dispatch a request to the server using whichever adapter
@@ -33259,10 +33300,10 @@
 	    adapter = config.adapter;
 	  } else if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(294);
+	    adapter = __webpack_require__(296);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(294);
+	    adapter = __webpack_require__(296);
 	  }
 
 	  return Promise.resolve(config)
@@ -33284,12 +33325,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	/**
 	 * Transform the data for a request or a response
@@ -33309,18 +33350,18 @@
 	};
 
 /***/ },
-/* 294 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(286);
-	var settle = __webpack_require__(295);
-	var buildURL = __webpack_require__(298);
-	var parseHeaders = __webpack_require__(299);
-	var isURLSameOrigin = __webpack_require__(300);
-	var createError = __webpack_require__(296);
-	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(301);
+	var utils = __webpack_require__(288);
+	var settle = __webpack_require__(297);
+	var buildURL = __webpack_require__(300);
+	var parseHeaders = __webpack_require__(301);
+	var isURLSameOrigin = __webpack_require__(302);
+	var createError = __webpack_require__(298);
+	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(303);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -33411,7 +33452,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(302);
+	      var cookies = __webpack_require__(304);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
@@ -33471,12 +33512,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 295 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(296);
+	var createError = __webpack_require__(298);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -33496,12 +33537,12 @@
 	};
 
 /***/ },
-/* 296 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(297);
+	var enhanceError = __webpack_require__(299);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -33518,7 +33559,7 @@
 	};
 
 /***/ },
-/* 297 */
+/* 299 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33543,12 +33584,12 @@
 	};
 
 /***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	function encode(val) {
 	  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -33609,12 +33650,12 @@
 	};
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	/**
 	 * Parse headers into an object
@@ -33653,12 +33694,12 @@
 	};
 
 /***/ },
-/* 300 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33721,7 +33762,7 @@
 	}();
 
 /***/ },
-/* 301 */
+/* 303 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33761,12 +33802,12 @@
 	module.exports = btoa;
 
 /***/ },
-/* 302 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(286);
+	var utils = __webpack_require__(288);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33819,7 +33860,7 @@
 	}();
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33840,7 +33881,7 @@
 	};
 
 /***/ },
-/* 304 */
+/* 306 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33858,7 +33899,7 @@
 	};
 
 /***/ },
-/* 305 */
+/* 307 */
 /***/ function(module, exports) {
 
 	'use strict';

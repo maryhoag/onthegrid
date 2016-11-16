@@ -1,6 +1,7 @@
 var React = require('react');
 
-
+var Fonts = require('./Fonts');
+var Tabs = require('./Tabs');
 import { Button, Card, Row, Col } from 'react-materialize';
 
 var AddPage = React.createClass({
@@ -27,20 +28,9 @@ var AddPage = React.createClass({
 							<div className="input-field col s3 push-s3">
 							<nav>
 						      	<ul>
-						      		<li><a href="#">Border Color</a>
-						      			<ul id="borderColor">
-						      				<li><a href='#' className="colorChoice" value="blue" onClick={this.props._onBorderSelect} > blue </a></li>
-						      				<li><a href="#" value="red" onClick={this.props._onBorderSelect} >red</a></li>
-						      				<li><a href="#" value="green" onClick={this.props._onBorderSelect} >green</a></li>
-						      			</ul>
-						      		</li>
-						      		<li><a href="#">Font</a>
-						      			<ul>
-						      				<li><a href="#">sharpie</a></li>
-						      				<li><a href="#">script</a></li>
-						      				<li><a href="#">prompt</a></li>
-						      			</ul>
-						      		</li>
+						      		<Tabs _onBorderSelect={this.props._onBorderSelect} borderColor={this.props.borderColor} defaultBorderOption={this.props.defaultBorderOption} blueButton={this.props.blueButton} />
+                
+						      		<Fonts _onFontSelect={this.props._onFontSelect} font={this.props.font} fontDefault={this.props.defaultFontOption} />
 						      	</ul>
 						      	</nav>
 							</div>
