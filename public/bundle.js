@@ -21475,12 +21475,11 @@
 
 	//include children
 	var Login = __webpack_require__(216);
+	var AddPage1 = __webpack_require__(280);
+	var AddPage2 = __webpack_require__(281);
+	var Pages1 = __webpack_require__(282);
 
-	var Pages = __webpack_require__(280);
-	var AddPage = __webpack_require__(281);
-	var Story = __webpack_require__(284);
-
-	var helpers = __webpack_require__(285);
+	var helpers = __webpack_require__(284);
 
 	//main component
 	var Main = React.createClass({
@@ -21677,12 +21676,12 @@
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						this.state.addPageVisible ? React.createElement(AddPage, { addHandler: this.addHandler, options: this.state.options, defaultOption: this.state.defaultOption, _onFontSelect: this.state._onFontSelect, _onBorderSelect: this.state._onBorderSelect, font: this.state.font, borderColor: this.state.borderColor, fontDefault: this.state.defaultFontOption, defaultBorderOption: this.state.defaultBorderOption, blueButton: this.state.blueButton, contentObj: this.state.contentObj, addPageModal: this.state.addPageModal, addPageVisible: this.state.addPageVisible, getPages: this.state.getPages }) : null
+						this.state.addPageVisible ? React.createElement(AddPage1, { addHandler: this.addHandler, options: this.state.options, defaultOption: this.state.defaultOption, _onFontSelect: this.state._onFontSelect, _onBorderSelect: this.state._onBorderSelect, font: this.state.font, borderColor: this.state.borderColor, fontDefault: this.state.defaultFontOption, defaultBorderOption: this.state.defaultBorderOption, blueButton: this.state.blueButton, contentObj: this.state.contentObj, addPageModal: this.state.addPageModal, addPageVisible: this.state.addPageVisible, getPages: this.state.getPages }) : null
 					),
 					React.createElement(
 						'div',
 						{ className: 'row' },
-						this.state.loggedIn ? React.createElement(Pages, { posts: this.state.posts, loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
+						this.state.loggedIn ? React.createElement(Pages1, { posts: this.state.posts, loggedIn: this.state.loggedIn, pagesList: this.state.pagesList, searching: this.state.searaching }) : null
 					)
 				),
 				React.createElement(
@@ -32256,85 +32255,44 @@
 
 	var _reactMaterialize = __webpack_require__(173);
 
-	//include react
 	var React = __webpack_require__(1);
 
-	//indlude Child
-	//
+	var AddPage2 = __webpack_require__(281);
+
+	var AddPage1 = React.createClass({
+	    displayName: 'AddPage1',
 
 
-	var Pages = React.createClass({
-		displayName: 'Pages',
+	    render: function render() {
 
+	        if (this.props.addPageVisible) {
 
-		render: function render() {
-			console.log('posts in component are', this.props.posts);
+	            console.log('firing');
+	        }
 
-			if (this.props.loggedIn == true) {
-				console.log(this);
-			} else {
-				console.log(false);
-			}
-
-			var pagesNodes = this.props.posts.map(function (post) {
-				console.log(post);
-				return React.createElement(
-					'div',
-					{ key: post._id, className: 'post col s12' },
-					React.createElement(
-						'p',
-						{ className: 'left icons' },
-						React.createElement(
-							'i',
-							{ className: 'material-icons right' },
-							'label_outline'
-						)
-					),
-					React.createElement(
-						'h3',
-						{ className: 'title' },
-						' ',
-						post.title,
-						' '
-					),
-					React.createElement(
-						'p',
-						{ className: 'text' },
-						' ',
-						post.text,
-						' '
-					),
-					React.createElement('img', { src: post.image, height: '300', width: '350' })
-				);
-			});
-			console.log('pages nodes are ', pagesNodes);
-			return React.createElement(
-				'div',
-				{ className: 'pagesContainer' },
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'div',
-						{ className: '#postGroup col s12' },
-						React.createElement(
-							'h3',
-							null,
-							'Pages'
-						),
-						React.createElement(
-							'div',
-							null,
-							pagesNodes
-						)
-					)
-				)
-			);
-		}
-
+	        return React.createElement(
+	            'div',
+	            { className: 'row adding' },
+	            React.createElement(
+	                'form',
+	                { id: 'bg-color' },
+	                React.createElement(AddPage2, null)
+	            ),
+	            React.createElement(
+	                'button',
+	                { id: 'submit', className: 'btn waves-effect waves-light right', type: 'submit', name: 'action', onClick: this.props.addHandler },
+	                'Save',
+	                React.createElement(
+	                    'i',
+	                    { className: 'material-icons right' },
+	                    'send'
+	                )
+	            )
+	        );
+	    }
 	});
 
-	module.exports = Pages;
+	module.exports = AddPage1;
 
 /***/ },
 /* 281 */
@@ -32346,150 +32304,191 @@
 
 	var React = __webpack_require__(1);
 
-	var Fonts = __webpack_require__(282);
-	var Tabs = __webpack_require__(283);
+	var AddPage2 = React.createClass({
+	    displayName: 'AddPage2',
 
 
-	var AddPage = React.createClass({
-		displayName: 'AddPage',
+	    render: function render() {
 
-
-		render: function render() {
-
-			if (this.props.addPageVisible) {
-
-				console.log('firing');
-			}
-
-			return React.createElement(
-				'div',
-				{ className: 'row adding' },
-				React.createElement(
-					'form',
-					{ id: 'bg-color' },
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'input-field col s12 m6' },
-							React.createElement('input', { id: 'postTitle', className: 'materialize-textarea validate', type: 'text' }),
-							React.createElement(
-								'label',
-								{ htmlFor: 'postTitle' },
-								'Title'
-							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'input-field col s3 push-s3' },
-							React.createElement(
-								'nav',
-								null,
-								React.createElement(
-									'ul',
-									null,
-									React.createElement(Tabs, { _onBorderSelect: this.props._onBorderSelect, borderColor: this.props.borderColor, defaultBorderOption: this.props.defaultBorderOption, blueButton: this.props.blueButton }),
-									React.createElement(Fonts, { _onFontSelect: this.props._onFontSelect, font: this.props.font, fontDefault: this.props.defaultFontOption })
-								)
-							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'input-field col s12' },
-							React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
-							React.createElement(
-								'label',
-								{ htmlFor: 'textarea1' },
-								'What are you going to do today?'
-							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'input-field col m6 s12' },
-							React.createElement('input', { id: 'imageURL', className: 'materialize-textarea validate', type: 'text' }),
-							React.createElement(
-								'label',
-								{ htmlFor: 'image' },
-								'image URL '
-							)
-						)
-					)
-				),
-				React.createElement(
-					'button',
-					{ id: 'submit', className: 'btn waves-effect waves-light right', type: 'submit', name: 'action', onClick: this.props.addHandler },
-					'Save',
-					React.createElement(
-						'i',
-						{ className: 'material-icons right' },
-						'send'
-					)
-				)
-			);
-		}
-
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'input-field col s12 m6' },
+	                    React.createElement('input', { id: 'postTitle', className: 'materialize-textarea validate', type: 'text' }),
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: 'postTitle' },
+	                        'Title'
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'input-field col s3 push-s3' },
+	                    React.createElement(
+	                        'nav',
+	                        null,
+	                        React.createElement(
+	                            'ul',
+	                            null,
+	                            React.createElement(
+	                                'li',
+	                                null,
+	                                React.createElement(
+	                                    'a',
+	                                    { href: '#' },
+	                                    'Border Color'
+	                                ),
+	                                React.createElement(
+	                                    'ul',
+	                                    { id: 'borderColor' },
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#', className: 'colorChoice', value: 'blue', onClick: this.props._onBorderSelect },
+	                                            ' blue '
+	                                        )
+	                                    ),
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#', value: 'red', onClick: this.props._onBorderSelect },
+	                                            'red'
+	                                        )
+	                                    ),
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#', value: 'green', onClick: this.props._onBorderSelect },
+	                                            'green'
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            React.createElement(
+	                                'li',
+	                                null,
+	                                React.createElement(
+	                                    'a',
+	                                    { href: '#' },
+	                                    'Font'
+	                                ),
+	                                React.createElement(
+	                                    'ul',
+	                                    null,
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#' },
+	                                            'sharpie'
+	                                        )
+	                                    ),
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#' },
+	                                            'script'
+	                                        )
+	                                    ),
+	                                    React.createElement(
+	                                        'li',
+	                                        null,
+	                                        React.createElement(
+	                                            'a',
+	                                            { href: '#' },
+	                                            'prompt'
+	                                        )
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'input-field col s12' },
+	                    React.createElement('textarea', { id: 'postBody', className: 'materialize-textarea' }),
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: 'textarea1' },
+	                        'What are you going to do today?'
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'input-field col m6 s12' },
+	                    React.createElement('input', { id: 'imageURL', className: 'materialize-textarea validate', type: 'text' }),
+	                    React.createElement(
+	                        'label',
+	                        { htmlFor: 'image' },
+	                        ' image URL '
+	                    )
+	                )
+	            )
+	        );
+	    }
 	});
 
-	module.exports = AddPage;
+	module.exports = AddPage2;
 
 /***/ },
 /* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var _reactMaterialize = __webpack_require__(173);
 
 	var React = __webpack_require__(1);
 
-	var Fonts = React.createClass({
-	    displayName: "Fonts",
+	var Pages2 = __webpack_require__(283);
+
+	var Pages1 = React.createClass({
+	    displayName: 'Pages1',
 
 
 	    render: function render() {
+
 	        return React.createElement(
-	            "li",
-	            null,
+	            'div',
+	            { className: 'pagesContainer' },
 	            React.createElement(
-	                "a",
-	                { href: "#" },
-	                "Font"
-	            ),
-	            React.createElement(
-	                "ul",
-	                null,
+	                'div',
+	                { className: 'row' },
 	                React.createElement(
-	                    "li",
-	                    null,
+	                    'div',
+	                    { className: '#postGroup col s12' },
 	                    React.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        "sharpie"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
+	                        'h3',
+	                        null,
+	                        'Pages'
+	                    ),
 	                    React.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        "script"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        "prompt"
+	                        'div',
+	                        null,
+	                        React.createElement(Pages2, { addHandler: this.addHandler, options: this.props.options, defaultOption: this.props.defaultOption, _onFontSelect: this.props._onFontSelect, _onBorderSelect: this.props._onBorderSelect, font: this.props.font, borderColor: this.props.borderColor, fontDefault: this.props.defaultFontOption, defaultBorderOption: this.props.defaultBorderOption, blueButton: this.props.blueButton, contentObj: this.props.contentObj, addPageModal: this.props.addPageModal, addPageVisible: this.props.addPageVisible, getPages: this.props.getPages, posts: this.props.posts, loggedIn: this.props.loggedIn, pagesList: this.props.pagesList, searching: this.props.searaching })
 	                    )
 	                )
 	            )
@@ -32497,64 +32496,73 @@
 	    }
 	});
 
-	module.exports = Fonts;
+	module.exports = Pages1;
 
 /***/ },
 /* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var _reactMaterialize = __webpack_require__(173);
 
 	var React = __webpack_require__(1);
 
-	var Tabs = React.createClass({
-	    displayName: "Tabs",
+	var Pages2 = React.createClass({
+					displayName: 'Pages2',
 
-	    render: function render() {
-	        return React.createElement(
-	            "li",
-	            null,
-	            React.createElement(
-	                "a",
-	                { href: "#" },
-	                "Border Color"
-	            ),
-	            React.createElement(
-	                "ul",
-	                { id: "borderColor" },
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "a",
-	                        { href: "#", className: "colorChoice", value: "blue", onClick: this.props._onBorderSelect },
-	                        " blue "
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "a",
-	                        { href: "#", value: "red", onClick: this.props._onBorderSelect },
-	                        "red"
-	                    )
-	                ),
-	                React.createElement(
-	                    "li",
-	                    null,
-	                    React.createElement(
-	                        "a",
-	                        { href: "#", value: "green", onClick: this.props._onBorderSelect },
-	                        "green"
-	                    )
-	                )
-	            )
-	        );
-	    }
+
+					render: function render() {
+									console.log('posts in component are', this.props.posts);
+
+									if (this.props.loggedIn == true) {
+													console.log(this);
+									} else {
+													console.log(false);
+									}
+
+									var pagesNodes = this.props.posts.map(function (post) {
+													console.log(post);
+													return React.createElement(
+																	'div',
+																	{ key: post._id, className: 'post col s12' },
+																	React.createElement(
+																					'p',
+																					{ className: 'left icons' },
+																					React.createElement(
+																									'i',
+																									{ className: 'material-icons right' },
+																									'label_outline'
+																					)
+																	),
+																	React.createElement(
+																					'h3',
+																					{ className: 'title' },
+																					' ',
+																					post.title,
+																					' '
+																	),
+																	React.createElement(
+																					'p',
+																					{ className: 'text' },
+																					' ',
+																					post.text,
+																					' '
+																	),
+																	React.createElement('img', { src: post.image, height: '300', width: '350' })
+													);
+									});
+									//console.log('pages nodes are ',pagesNodes)
+
+									return React.createElement(
+													'div',
+													null,
+													pagesNodes
+									);
+					}
 	});
 
-	module.exports = Tabs;
+	module.exports = Pages2;
 
 /***/ },
 /* 284 */
@@ -32562,48 +32570,7 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(1);
-
-	var Story = function (_React$Component) {
-		_inherits(Story, _React$Component);
-
-		function Story() {
-			_classCallCheck(this, Story);
-
-			return _possibleConstructorReturn(this, (Story.__proto__ || Object.getPrototypeOf(Story)).apply(this, arguments));
-		}
-
-		_createClass(Story, [{
-			key: 'render',
-			value: function render() {
-				return React.createElement(
-					'p',
-					null,
-					' hiya '
-				);
-			}
-		}]);
-
-		return Story;
-	}(React.Component);
-
-	module.exports = Story;
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var axios = __webpack_require__(286);
+	var axios = __webpack_require__(285);
 
 	var helpers = {
 
@@ -32651,22 +32618,22 @@
 	module.exports = helpers;
 
 /***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(286);
+
+/***/ },
 /* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(287);
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var utils = __webpack_require__(288);
-	var bind = __webpack_require__(289);
-	var Axios = __webpack_require__(290);
+	var utils = __webpack_require__(287);
+	var bind = __webpack_require__(288);
+	var Axios = __webpack_require__(289);
 
 	/**
 	 * Create an instance of Axios
@@ -32702,7 +32669,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(307);
+	axios.spread = __webpack_require__(306);
 
 	module.exports = axios;
 
@@ -32710,14 +32677,14 @@
 	module.exports.default = axios;
 
 /***/ },
-/* 288 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var bind = __webpack_require__(289);
+	var bind = __webpack_require__(288);
 
 	/*global toString:true*/
 
@@ -33012,7 +32979,7 @@
 	};
 
 /***/ },
-/* 289 */
+/* 288 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33028,17 +32995,17 @@
 	};
 
 /***/ },
-/* 290 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(291);
-	var utils = __webpack_require__(288);
-	var InterceptorManager = __webpack_require__(293);
-	var dispatchRequest = __webpack_require__(294);
-	var isAbsoluteURL = __webpack_require__(305);
-	var combineURLs = __webpack_require__(306);
+	var defaults = __webpack_require__(290);
+	var utils = __webpack_require__(287);
+	var InterceptorManager = __webpack_require__(292);
+	var dispatchRequest = __webpack_require__(293);
+	var isAbsoluteURL = __webpack_require__(304);
+	var combineURLs = __webpack_require__(305);
 
 	/**
 	 * Create a new instance of Axios
@@ -33118,13 +33085,13 @@
 	module.exports = Axios;
 
 /***/ },
-/* 291 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
-	var normalizeHeaderName = __webpack_require__(292);
+	var utils = __webpack_require__(287);
+	var normalizeHeaderName = __webpack_require__(291);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -33190,12 +33157,12 @@
 	};
 
 /***/ },
-/* 292 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -33207,12 +33174,12 @@
 	};
 
 /***/ },
-/* 293 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -33264,13 +33231,13 @@
 	module.exports = InterceptorManager;
 
 /***/ },
-/* 294 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(288);
-	var transformData = __webpack_require__(295);
+	var utils = __webpack_require__(287);
+	var transformData = __webpack_require__(294);
 
 	/**
 	 * Dispatch a request to the server using whichever adapter
@@ -33300,10 +33267,10 @@
 	    adapter = config.adapter;
 	  } else if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(296);
+	    adapter = __webpack_require__(295);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(296);
+	    adapter = __webpack_require__(295);
 	  }
 
 	  return Promise.resolve(config)
@@ -33325,12 +33292,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 295 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	/**
 	 * Transform the data for a request or a response
@@ -33350,18 +33317,18 @@
 	};
 
 /***/ },
-/* 296 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(288);
-	var settle = __webpack_require__(297);
-	var buildURL = __webpack_require__(300);
-	var parseHeaders = __webpack_require__(301);
-	var isURLSameOrigin = __webpack_require__(302);
-	var createError = __webpack_require__(298);
-	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(303);
+	var utils = __webpack_require__(287);
+	var settle = __webpack_require__(296);
+	var buildURL = __webpack_require__(299);
+	var parseHeaders = __webpack_require__(300);
+	var isURLSameOrigin = __webpack_require__(301);
+	var createError = __webpack_require__(297);
+	var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(302);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -33452,7 +33419,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(304);
+	      var cookies = __webpack_require__(303);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
@@ -33512,12 +33479,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 297 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(298);
+	var createError = __webpack_require__(297);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -33537,12 +33504,12 @@
 	};
 
 /***/ },
-/* 298 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(299);
+	var enhanceError = __webpack_require__(298);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -33559,7 +33526,7 @@
 	};
 
 /***/ },
-/* 299 */
+/* 298 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33584,12 +33551,12 @@
 	};
 
 /***/ },
-/* 300 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	function encode(val) {
 	  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -33650,12 +33617,12 @@
 	};
 
 /***/ },
-/* 301 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	/**
 	 * Parse headers into an object
@@ -33694,12 +33661,12 @@
 	};
 
 /***/ },
-/* 302 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33762,7 +33729,7 @@
 	}();
 
 /***/ },
-/* 303 */
+/* 302 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33802,12 +33769,12 @@
 	module.exports = btoa;
 
 /***/ },
-/* 304 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(288);
+	var utils = __webpack_require__(287);
 
 	module.exports = utils.isStandardBrowserEnv() ?
 
@@ -33860,7 +33827,7 @@
 	}();
 
 /***/ },
-/* 305 */
+/* 304 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33881,7 +33848,7 @@
 	};
 
 /***/ },
-/* 306 */
+/* 305 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33899,7 +33866,7 @@
 	};
 
 /***/ },
-/* 307 */
+/* 306 */
 /***/ function(module, exports) {
 
 	'use strict';
